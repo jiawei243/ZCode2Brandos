@@ -1,7 +1,7 @@
 import type { HttpClientPort, HttpClientRunOptions, TraceContext } from "@wbrand/contracts";
 import { resolveBigModelApiOrigin } from "@wbrand/shared";
 
-const ZAI_API_HOST = "https://api.unew.cc";
+const ZAI_API_HOST = "https://api.z.ai";
 const JSON_CONTENT_TYPE = "application/json";
 const WBRAND_API_KEY_NAME = "wbrand-api-key";
 const DEFAULT_ORG_NAME = "默认机构";
@@ -125,7 +125,7 @@ async function resolveZaiBizToken(
   );
   const token = payload?.access_token?.trim() ?? payload?.accessToken?.trim() ?? "";
   if (!token) {
-    throw new CodingPlanApiKeyError("UNEW.CC biz token response is missing access_token.");
+    throw new CodingPlanApiKeyError("Z.AI biz token response is missing access_token.");
   }
   return token;
 }

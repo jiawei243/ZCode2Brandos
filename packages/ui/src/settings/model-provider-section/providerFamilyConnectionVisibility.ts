@@ -181,7 +181,7 @@ export function resolveCodingPlanEntitlementState({
 
   if (currentSubscription) {
     return {
-      // UNEW.CC/BigModel 的真实套餐状态来自 subscription/list。
+      // Z.AI/BigModel 的真实套餐状态来自 subscription/list。
       status: "purchased",
       ...(entitlement?.error
         ? { statusLabelId: "settings.modelProvider.codingPlan.status.unavailable" }

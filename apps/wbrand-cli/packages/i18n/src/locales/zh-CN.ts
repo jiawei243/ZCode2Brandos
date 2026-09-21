@@ -19,7 +19,7 @@ export const zhCN: WBrandCopy = {
   commands   列出自定义 slash commands（\`commands list\`）
   doctor     检查运行时和打包假设
   login [zai|bigmodel]  通过浏览器授权登录
-  logout     删除共享的 UNEW.CC 登录凭据
+  logout     删除共享的 Z.AI 登录凭据
   plugins    管理插件与市场（\`plugins list|install|uninstall|enable|disable|update|validate|marketplace ...\`；别名 plugin）
   skills     列出本地 skills（\`skills list\`）
   tui        打开终端 UI
@@ -53,8 +53,8 @@ export const zhCN: WBrandCopy = {
 
 Slash Commands:
   /help [command]       显示 slash command 帮助
-  /login                使用 UNEW.CC OAuth 登录
-  /logout               删除共享的 UNEW.CC 登录凭据
+  /login                使用 Z.AI OAuth 登录
+  /logout               删除共享的 Z.AI 登录凭据
   /compact [instructions]  压缩当前对话
   /expert [status|resume|stop|<task>]  运行或管理 expert workflow
   /dwf [list|cancel|resume]  列出、取消或恢复 dynamic workflow run
@@ -117,15 +117,15 @@ Slash Commands:
           secondary: "打开浏览器登录，CLI 会自动查询授权结果。",
         },
         zaiApiKey: {
-          inputPrimary: "输入 UNEW.CC Coding Plan API Key",
+          inputPrimary: "输入 Z.AI Coding Plan API Key",
           inputSecondary: "在这里粘贴 key，输入时会隐藏显示。",
-          primary: "UNEW.CC Coding Plan API Key",
+          primary: "Z.AI Coding Plan API Key",
           secondary: "手动粘贴 Coding Plan API key。",
         },
         zaiOauth: {
-          pendingPrimary: "等待 UNEW.CC 授权",
+          pendingPrimary: "等待 Z.AI 授权",
           pendingSecondary: "请在浏览器里完成登录。授权完成后会继续配置。",
-          primary: "UNEW.CC Coding Plan",
+          primary: "Z.AI Coding Plan",
           secondary: "打开浏览器登录，并创建 Coding Plan API key。",
         },
       },

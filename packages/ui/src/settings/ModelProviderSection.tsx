@@ -1060,8 +1060,8 @@ export function ModelProviderSection({
       onRefresh={() => {
         void refreshModelProviderSection({
           refresh,
-          // 手动刷新设置页时也要同时刷新 Unew.cc / BigModel Team Plan 快照；
-          // 原来只刷新 BigModel，Unew.cc Team Plan 购买或订阅变化后会继续显示旧项目。
+          // 手动刷新设置页时也要同时刷新 Z.ai / BigModel Team Plan 快照；
+          // 原来只刷新 BigModel，Z.ai Team Plan 购买或订阅变化后会继续显示旧项目。
           refreshTeamPlanProducts: refreshAuthenticatedEnterpriseProducts,
         });
         refreshCodingPlanEntitlements();

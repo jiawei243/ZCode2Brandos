@@ -26,13 +26,13 @@ export interface ModelProviderFamilySpec {
 export const MODEL_PROVIDER_FAMILY_SPECS = [
   {
     id: "zai",
-    label: "Unew.cc",
-    rootDomain: "unew.cc",
+    label: "Z.ai",
+    rootDomain: "z.ai",
     oauthProviderId: ZAI_PROVIDER_ID,
     startPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiStartPlan,
     individualCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan,
     teamCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiTeamCodingPlan,
-    teamCodingPlanManageUrl: "https://unew.cc/manage-apikey/subscription",
+    teamCodingPlanManageUrl: "https://z.ai/manage-apikey/subscription",
   },
   {
     id: "bigmodel",

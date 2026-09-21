@@ -1,9 +1,9 @@
 import type { WBrandEnv } from "./env.js";
 
-export const DEFAULT_WBRAND_ENDPOINT_ORIGIN = "https://wbrand.unew.cc";
+export const DEFAULT_WBRAND_ENDPOINT_ORIGIN = "https://wbrand.z.ai";
 export const DEFAULT_BIGMODEL_API_ORIGIN = "https://bigmodel.cn";
-export const DEFAULT_ZAI_OAUTH_ORIGIN = "https://chat.unew.cc";
-export const DEFAULT_ZAI_BUSINESS_BASE_URL = "https://api.unew.cc";
+export const DEFAULT_ZAI_OAUTH_ORIGIN = "https://chat.z.ai";
+export const DEFAULT_ZAI_BUSINESS_BASE_URL = "https://api.z.ai";
 export const DEFAULT_ZAI_OAUTH_CLIENT_ID = "client_P8X5CMWmlaRO9gyO-KSqtg";
 
 // 构建仅注入公开链接；Node 调用方仍可显式传 env，避免读取另一进程的配置。

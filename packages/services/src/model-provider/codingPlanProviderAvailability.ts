@@ -241,7 +241,7 @@ async function validateSelectedTeamPlanAvailability(
   }
   const wbrandJwtToken = (await context.credentialService?.load(WBRAND_JWT_TOKEN_KEY))?.trim();
   // BigModel 旧版本可能把 wbrandjwttoken 误写进 oauth access token；
-  // 但 Unew.cc 的 business JWT 本身就是合法 Bearer token，不能套用这个 stale-token 防御。
+  // 但 Z.ai 的 business JWT 本身就是合法 Bearer token，不能套用这个 stale-token 防御。
   if (family === "bigmodel" && wbrandJwtToken && token === wbrandJwtToken) {
     return { kind: "unavailable", reason: "coding_plan_not_connected" };
   }

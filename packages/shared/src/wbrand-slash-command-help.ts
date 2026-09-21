@@ -20,7 +20,7 @@ export const BUILTIN_WBRAND_SLASH_COMMAND_HELP_ENTRIES: readonly BuiltinWBrandSl
     {
       details: [
         "Opens a Coding Plan setup picker when called without arguments.",
-        "Unew.cc and BigModel browser login poll for authorization, then securely save credentials and refresh available models.",
+        "Z.ai and BigModel browser login poll for authorization, then securely save credentials and refresh available models.",
         "Manual API key variants accept the API key as an argument.",
       ],
       name: "login",
@@ -29,9 +29,9 @@ export const BUILTIN_WBRAND_SLASH_COMMAND_HELP_ENTRIES: readonly BuiltinWBrandSl
         "/login [zai-coding-plan|bigmodel-coding-plan|zai-coding-plan-api-key <api-key>|bigmodel-coding-plan-api-key <api-key>]",
     },
     {
-      details: ["Deletes Unew.cc OAuth credentials from the shared WBrand credential store."],
+      details: ["Deletes Z.ai OAuth credentials from the shared WBrand credential store."],
       name: "logout",
-      summary: "Remove the shared Unew.cc login credentials.",
+      summary: "Remove the shared Z.ai login credentials.",
       usage: "/logout",
     },
     {

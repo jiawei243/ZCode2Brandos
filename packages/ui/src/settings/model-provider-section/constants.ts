@@ -34,7 +34,7 @@ export interface PresetProviderSpec {
 export const PRESET_PROVIDER_SPECS: PresetProviderSpec[] = [
   {
     id: BUILTIN_MODEL_PROVIDER_IDS.zaiStartPlan,
-    displayName: "Unew.cc",
+    displayName: "Z.ai",
     oauthProviderId: ZAI_PROVIDER_ID,
   },
   {
@@ -78,16 +78,16 @@ export const CODING_PLAN_PROVIDER_SPECS: CodingPlanProviderSpec[] = [
   {
     id: BUILTIN_MODEL_PROVIDER_IDS.zaiStartPlan,
     oauthProviderId: ZAI_PROVIDER_ID,
-    label: "Unew.cc - Coding Plan",
-    providerName: "Unew.cc",
-    purchaseUrl: "https://unew.cc/manage-apikey/subscription",
+    label: "Z.ai - Coding Plan",
+    providerName: "Z.ai",
+    purchaseUrl: "https://z.ai/manage-apikey/subscription",
   },
   {
     id: BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan,
     oauthProviderId: ZAI_PROVIDER_ID,
-    label: "Unew.cc - Coding Plan",
-    providerName: "Unew.cc",
-    purchaseUrl: "https://unew.cc/manage-apikey/subscription",
+    label: "Z.ai - Coding Plan",
+    providerName: "Z.ai",
+    purchaseUrl: "https://z.ai/manage-apikey/subscription",
   },
   {
     id: BUILTIN_MODEL_PROVIDER_IDS.bigmodelIndividualCodingPlan,
@@ -118,7 +118,7 @@ export function resolveModelProviderDisplayName(
     provider.providerId === BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan ||
     provider.providerId === BUILTIN_MODEL_PROVIDER_IDS.zaiTeamCodingPlan
   ) {
-    return "Unew.cc - Coding Plan";
+    return "Z.ai - Coding Plan";
   }
 
   if (provider.providerId === BUILTIN_MODEL_PROVIDER_IDS.zaiStartPlan) {

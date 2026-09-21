@@ -4,13 +4,13 @@ import type { EnvRecord } from "./model-execution.js";
 /**
  * 官方 Coding Plan 的模型请求经 WBrand 平台网关发送。
  *
- * Unew.cc / BigModel Coding Plan 是 WBrand 的官方订阅套餐，模型请求统一发往 WBrand 平台网关，
+ * Z.ai / BigModel Coding Plan 是 WBrand 的官方订阅套餐，模型请求统一发往 WBrand 平台网关，
  * 由平台完成套餐权益校验等平台侧处理后转发到对应的模型服务。客户端这里只做一件事：
  * 把官方模型端点替换为对应的网关端点，请求方法、请求体、鉴权头与响应均原样透传。
  *
  * 只对下表中的官方端点生效，按协议、主机、端口、路径精确匹配，用户自建 provider 与
  * 第三方模型服务不受影响。网关 origin 跟随 WBRAND_BASE_URL / WBRAND_ENDPOINT_ORIGIN，
- * 缺省为线上 https://wbrand.unew.cc。
+ * 缺省为线上 https://wbrand.z.ai。
  */
 export interface OfficialCodingPlanGatewayRoute {
   /** 官方模型端点（含路径），仅 https。 */
@@ -25,7 +25,7 @@ export const OFFICIAL_CODING_PLAN_GATEWAY_ROUTES: readonly OfficialCodingPlanGat
     gatewayPath: "/api/v1/ultra/anthropic/v1/messages",
   },
   {
-    providerEndpoint: "https://api.unew.cc/api/anthropic/v1/messages",
+    providerEndpoint: "https://api.z.ai/api/anthropic/v1/messages",
     gatewayPath: "/api/v1/ultra-zai/anthropic/v1/messages",
   },
 ];

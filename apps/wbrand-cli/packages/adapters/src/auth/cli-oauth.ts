@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import type { HttpClientPort, HttpClientRunOptions, TraceContext } from "@wbrand/contracts";
 
-const DEFAULT_WBRAND_OAUTH_BASE_URL = "https://wbrand.unew.cc/api/v1";
+const DEFAULT_WBRAND_OAUTH_BASE_URL = "https://wbrand.z.ai/api/v1";
 export type CliOAuthProviderId = "zai" | "bigmodel";
 const POLL_TOKEN_BYTES = 32;
 const JSON_CONTENT_TYPE = "application/json";

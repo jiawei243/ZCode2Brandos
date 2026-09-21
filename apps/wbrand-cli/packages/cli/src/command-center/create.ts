@@ -95,7 +95,7 @@ export function createCommandCenter(deps: CommandCenterDeps): TuiSubmitPrompt {
           if (!deps.login) {
             return {
               mode: deps.getMode?.(),
-              response: "UNEW.CC Coding Plan login is not available in this client.",
+              response: "Z.AI Coding Plan login is not available in this client.",
             };
           }
 
@@ -109,7 +109,7 @@ export function createCommandCenter(deps: CommandCenterDeps): TuiSubmitPrompt {
                   await emitLoginAuthorizeMessage(
                     options,
                     data.authorize_url,
-                    "UNEW.CC",
+                    "Z.AI",
                     await deps.getApp(),
                   );
                 },

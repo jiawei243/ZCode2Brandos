@@ -97,7 +97,7 @@ export async function resolveAccountTeamPlanRuntimeApiKey(
   return resolveTeamPlanProjectApiKey({
     apiClient: params.apiClient,
     authorization: token,
-    family: family === "zai" ? "Unew.cc" : "BigModel",
+    family: family === "zai" ? "Z.ai" : "BigModel",
     host,
     organizationId,
     projectId,
@@ -107,7 +107,7 @@ export async function resolveAccountTeamPlanRuntimeApiKey(
 async function resolveTeamPlanProjectApiKey(params: {
   readonly apiClient: ApiClient;
   readonly authorization: string;
-  readonly family: "BigModel" | "Unew.cc";
+  readonly family: "BigModel" | "Z.ai";
   readonly host: string;
   readonly organizationId: string;
   readonly projectId: string;

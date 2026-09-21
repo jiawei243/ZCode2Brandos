@@ -76,7 +76,7 @@ function isCodingPlanPaypalNavigationUrl(url: string): boolean {
     if (parsed.protocol !== "https:") return false;
     if (isPaypalHostname(parsed.hostname)) return true;
     return (
-      ["https://api.unew.cc", resolveZaiBusinessBaseUrl()].includes(parsed.origin) &&
+      ["https://api.z.ai", resolveZaiBusinessBaseUrl()].includes(parsed.origin) &&
       parsed.pathname.startsWith("/api/pay/paypal/")
     );
   } catch {
