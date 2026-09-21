@@ -553,8 +553,12 @@ export function SessionPane({
     fileRewindPreview,
   } = useV4Conversation();
   const platform = useOptionalPlatform();
-  const { conversationShareService, modelSelectionService, wbrandSessionService, wbrandTaskService } =
-    useServices();
+  const {
+    conversationShareService,
+    modelSelectionService,
+    wbrandSessionService,
+    wbrandTaskService,
+  } = useServices();
   const { intl, locale } = useWBrandIntl();
   const slashCommands = useSlashCommands(workspacePath, workspaceIdentity);
   const baseWorkspaceServices = useBaseWorkspaceServices();

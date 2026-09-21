@@ -1,5 +1,8 @@
 import type { ProviderSettingsView } from "@wbrand/services";
-import { type WBrandProviderAccountAccess, wbrandProviderAccountAccessSchema } from "@wbrand/shared";
+import {
+  type WBrandProviderAccountAccess,
+  wbrandProviderAccountAccessSchema,
+} from "@wbrand/shared";
 
 interface EntitledAccountProviderAccess {
   readonly providerId: string;

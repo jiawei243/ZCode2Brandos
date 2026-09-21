@@ -1764,7 +1764,9 @@ export function SettingsPage({
                             onToolGroupingChangesEnabledChange={
                               handleToolGroupingChangesEnabledChange
                             }
-                            onWBrandInteractionBehaviorChange={handleWBrandInteractionBehaviorChange}
+                            onWBrandInteractionBehaviorChange={
+                              handleWBrandInteractionBehaviorChange
+                            }
                             onAskUserQuestionAutoResolutionEnabledChange={
                               handleAskUserQuestionAutoResolutionEnabledChange
                             }

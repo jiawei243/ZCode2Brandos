@@ -1,5 +1,9 @@
 import { recordArmsCustomEventForE2E } from "@wbrand/ui";
-import { DesktopCommandIds, buildLocalMediaPreviewUrl, type IPlatformService } from "@wbrand/shared";
+import {
+  DesktopCommandIds,
+  buildLocalMediaPreviewUrl,
+  type IPlatformService,
+} from "@wbrand/shared";
 
 import { desktopBrowserPlatformBridge } from "./desktopBrowserPlatformBridge.js";
 
@@ -109,7 +113,8 @@ export function createDesktopPlatform(options: {
     onDesktopWindowChromeStateChanged: window.wbrand.onDesktopWindowChromeStateChanged
       ? (handler) => window.wbrand.onDesktopWindowChromeStateChanged!(handler)
       : undefined,
-    getWindowControlsOverlayMetrics: () => window.wbrand.getWindowControlsOverlayMetrics?.() ?? null,
+    getWindowControlsOverlayMetrics: () =>
+      window.wbrand.getWindowControlsOverlayMetrics?.() ?? null,
     onWindowControlsOverlayChanged: (handler) =>
       window.wbrand.onWindowControlsOverlayChanged?.(handler) ?? (() => {}),
     getDesktopZoomLevel: () =>
@@ -122,7 +127,8 @@ export function createDesktopPlatform(options: {
       window.wbrand.captureWindowScreenshot?.() ?? Promise.resolve(null),
     onUpdateReady: (callback) => window.wbrand.onUpdateReady(callback),
     onUpdateCheckResult: (callback) => window.wbrand.onUpdateCheckResult(callback),
-    onUpdateStateChanged: (callback) => window.wbrand.onUpdateStateChanged?.(callback) ?? (() => {}),
+    onUpdateStateChanged: (callback) =>
+      window.wbrand.onUpdateStateChanged?.(callback) ?? (() => {}),
     getUpdateState: () =>
       window.wbrand.getUpdateState?.() ?? Promise.resolve({ kind: "idle", enabled: true }),
     downloadUpdate: () => window.wbrand.downloadUpdate?.() ?? Promise.resolve(),

@@ -63,7 +63,9 @@ const WBRAND_FILE_CITATION_SYNTAX = {
   allowTripleColon: true,
 } as const;
 
-export function extractWBrandFileCitationDirectives(content: string): WBrandFileCitationDirective[] {
+export function extractWBrandFileCitationDirectives(
+  content: string,
+): WBrandFileCitationDirective[] {
   return extractAssistantDirectives(
     content,
     WBRAND_FILE_CITATION_DIRECTIVE_NAME,

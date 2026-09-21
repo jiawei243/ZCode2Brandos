@@ -1146,8 +1146,8 @@ body {
 }
 
 .wbrand-task-interaction-countdown-fill {
-  animation: wbrand-task-interaction-countdown var(--wbrand-interaction-remaining-ms, 240000ms) linear
-    forwards;
+  animation: wbrand-task-interaction-countdown var(--wbrand-interaction-remaining-ms, 240000ms)
+    linear forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -437,7 +437,9 @@ export interface IWBrandTaskService {
   }): Promise<WBrandGroupedTaskViewStructure>;
 
   /** 一次性提交 grouped 视图最终排序和 membership，服务层用 sqlite transaction 落库 */
-  applyGroupedTaskViewOrder(params: WBrandGroupedTaskViewOrderInput): Promise<WBrandGroupedTaskView>;
+  applyGroupedTaskViewOrder(
+    params: WBrandGroupedTaskViewOrderInput,
+  ): Promise<WBrandGroupedTaskView>;
 
   /** 列出 workspace 下所有已归档 task */
   listArchivedTasks(params: {

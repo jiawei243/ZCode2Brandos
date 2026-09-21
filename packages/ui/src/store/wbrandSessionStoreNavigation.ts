@@ -20,7 +20,9 @@ type SetFn = (
   partial:
     | WBrandSessionStoreState
     | Partial<WBrandSessionStoreState>
-    | ((state: WBrandSessionStoreState) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
+    | ((
+        state: WBrandSessionStoreState,
+      ) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
 ) => void;
 type GetFn = () => WBrandSessionStoreState;
 

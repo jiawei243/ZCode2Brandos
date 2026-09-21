@@ -13,11 +13,11 @@
 
 WBrand is an AI coding workspace with desktop, browser, and terminal interfaces. This repository contains the clients, backend services, shared UI, and Agent CLI and runtime source code.
 
-| Interface                    | Purpose                                                                                   | Development command            |
-| ---------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------ |
-| Desktop                      | Electron desktop application                                                              | `pnpm dev:desktop`             |
-| Web / WBrand CLI distribution | Terminal and browser workspace; packages the TUI, Web client, backend, and Agent together | `pnpm dev:web`                 |
-| Agent CLI                    | The `wbrand` terminal interface, which also provides the Agent runtime for Desktop and Web | `pnpm --filter @wbrand/cli dev` |
+| Interface                     | Purpose                                                                                    | Development command             |
+| ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------- |
+| Desktop                       | Electron desktop application                                                               | `pnpm dev:desktop`              |
+| Web / WBrand CLI distribution | Terminal and browser workspace; packages the TUI, Web client, backend, and Agent together  | `pnpm dev:web`                  |
+| Agent CLI                     | The `wbrand` terminal interface, which also provides the Agent runtime for Desktop and Web | `pnpm --filter @wbrand/cli dev` |
 
 ## Setup
 
@@ -121,9 +121,9 @@ This entry runs the Agent CLI directly and does not handle the distribution's `-
 
 The root [.env.example](.env.example) provides sample service URLs and build configuration. Copy it to `.env` as needed and place local overrides in `.env.local`. Select the Desktop development environment with `dev:desktop:test` or `dev:desktop:prod`.
 
-| Setting                              | Purpose                                                                                 |
-| ------------------------------------ | --------------------------------------------------------------------------------------- |
-| `WBRAND_DATA_BASE_DIR`                | Base directory for application data, stored under its `.wbrand/` subdirectory            |
+| Setting                               | Purpose                                                                                 |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
+| `WBRAND_DATA_BASE_DIR`                | Base directory for application data, stored under its `.wbrand/` subdirectory           |
 | `WBRAND_SERVER_WORKSPACE`             | Workspace path for the Web backend                                                      |
 | `WBRAND_BUILTIN_PROVIDER_CONFIG_FILE` | Path to a local provider configuration file; uses the built-in configuration when unset |
 | `WBRAND_DIST_BASE_URL`                | Download base URL used by the CLI distribution installer                                |
@@ -200,12 +200,12 @@ Open `http://127.0.0.1:3030` to validate the complete flow, with one backend ser
 | `packages/desktop`                                   | Electron Main, Host, Renderer, and desktop packaging                                    |
 | `packages/web`                                       | Web client                                                                              |
 | `packages/server`                                    | HTTP / WebSocket services and remote connections                                        |
-| `packages/wbrand-server-cli`                          | Standalone server startup and process management                                        |
+| `packages/wbrand-server-cli`                         | Standalone server startup and process management                                        |
 | `packages/ui`                                        | Shared React components, hooks, and Zustand state                                       |
 | `packages/services`                                  | Business services and persistence                                                       |
 | `packages/shared`, `packages/rpc`, `packages/client` | Shared protocols and types, RPC framework, and Agent client SDK                         |
 | `packages/provider`, `packages/provider-node`        | Common provider capabilities and Node implementations                                   |
-| `apps/wbrand-cli`                                     | Agent CLI, TUI, runtime, and tools                                                      |
+| `apps/wbrand-cli`                                    | Agent CLI, TUI, runtime, and tools                                                      |
 | `scripts`, `config`, `third-party`                   | Build and maintenance scripts, built-in configuration, and third-party notice materials |
 
 ## Project Notice

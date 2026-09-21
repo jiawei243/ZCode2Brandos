@@ -35,7 +35,9 @@ type SetFn = (
   partial:
     | WBrandSessionStoreState
     | Partial<WBrandSessionStoreState>
-    | ((state: WBrandSessionStoreState) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
+    | ((
+        state: WBrandSessionStoreState,
+      ) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
 ) => void;
 
 let groupedDraftSequence = 0;

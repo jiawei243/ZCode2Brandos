@@ -1104,7 +1104,12 @@ export const wbrandPersistedMessageSchema = z.object({
     .optional(),
 });
 
-export const wbrandTaskGoalStatusSchema = z.enum(["active", "paused", "budget_limited", "complete"]);
+export const wbrandTaskGoalStatusSchema = z.enum([
+  "active",
+  "paused",
+  "budget_limited",
+  "complete",
+]);
 
 export const wbrandTaskTargetChangedActionSchema = z.enum([
   "set",

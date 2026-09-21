@@ -130,7 +130,12 @@ export function useWorkspaceSessionReload({
         }
 
         wbrandSessionStore.setWorkspaceInitAttempts(workspaceAbsPath, 0, workspaceIdentity);
-        wbrandSessionStore.setWorkspaceInitState(workspaceAbsPath, "ready", null, workspaceIdentity);
+        wbrandSessionStore.setWorkspaceInitState(
+          workspaceAbsPath,
+          "ready",
+          null,
+          workspaceIdentity,
+        );
 
         logger.info(
           `[App] workspace session 重建完成 workspace=${workspaceAbsPath} provider=${provider} resumeTaskId=${resumeTaskId ?? "<none>"}`,

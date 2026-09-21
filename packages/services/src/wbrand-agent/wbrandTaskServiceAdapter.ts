@@ -3753,7 +3753,8 @@ function textFromParts(parts: readonly WBrandMessagePart[]): string {
 function reasoningFromParts(parts: readonly WBrandMessagePart[]): string | undefined {
   const text = parts
     .filter(
-      (part): part is Extract<WBrandMessagePart, { type: "reasoning" }> => part.type === "reasoning",
+      (part): part is Extract<WBrandMessagePart, { type: "reasoning" }> =>
+        part.type === "reasoning",
     )
     .map((part) => part.text)
     .join("");
@@ -5358,7 +5359,9 @@ function apiRetryFromSessionInfoPayload(
     return runtimeRetry;
   }
 
-  const metaRetry = normalizeWBrandApiRetryStatus(asRecord(asRecord(payload._meta).wbrand).apiRetry);
+  const metaRetry = normalizeWBrandApiRetryStatus(
+    asRecord(asRecord(payload._meta).wbrand).apiRetry,
+  );
   if (metaRetry !== undefined) {
     return metaRetry;
   }

@@ -29,7 +29,10 @@ function buildTaskProviderByTaskId(
 
 export function hasBusyTaskInWorkspaceProvider(
   selectedProvider: WBrandProvider,
-  taskRuntimeByTaskId: Record<string, { status: WBrandTaskRuntimeStatus; provider?: WBrandProvider }>,
+  taskRuntimeByTaskId: Record<
+    string,
+    { status: WBrandTaskRuntimeStatus; provider?: WBrandProvider }
+  >,
   optimisticTaskMetaByTaskId: Record<string, { provider?: WBrandProvider }>,
   taskListCache?: Array<{ taskId: string; provider?: WBrandProvider }> | null,
   activeTaskId?: string | null,

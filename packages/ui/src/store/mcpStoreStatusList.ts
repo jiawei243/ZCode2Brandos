@@ -1,4 +1,8 @@
-import type { McpServerStatus, WBrandMcpServer, WBrandMcpServerStatusSnapshot } from "@wbrand/shared";
+import type {
+  McpServerStatus,
+  WBrandMcpServer,
+  WBrandMcpServerStatusSnapshot,
+} from "@wbrand/shared";
 
 type MappedMcpServerStatus = {
   authorization?: WBrandMcpServerStatusSnapshot["authorization"];

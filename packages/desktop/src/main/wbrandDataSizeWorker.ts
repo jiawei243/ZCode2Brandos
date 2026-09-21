@@ -1,6 +1,9 @@
 import { isMainThread, parentPort, workerData } from "node:worker_threads";
 
-import { scanWBrandDataDirectory, type WBrandDataSizeScanRequest } from "./wbrandDataSizeScanner.js";
+import {
+  scanWBrandDataDirectory,
+  type WBrandDataSizeScanRequest,
+} from "./wbrandDataSizeScanner.js";
 
 type WorkerResponse =
   | { ok: true; result: Awaited<ReturnType<typeof scanWBrandDataDirectory>> }

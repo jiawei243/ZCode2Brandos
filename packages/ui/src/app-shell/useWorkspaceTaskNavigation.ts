@@ -398,7 +398,9 @@ export function useWorkspaceTaskNavigation({
 
   const canGoBack = navCanGoBack(taskNavHistory);
   const canGoForward = navCanGoForward(taskNavHistory);
-  const currentWorkspaceState = useWBrandSessionStore.getState().getWorkspaceState(workspaceAbsPath);
+  const currentWorkspaceState = useWBrandSessionStore
+    .getState()
+    .getWorkspaceState(workspaceAbsPath);
   const isTaskSwitchLockedByModelRestart = shouldBlockTaskSelectionDuringModelRestart(
     currentWorkspaceState.modelSwitchPending,
     currentWorkspaceState.modelSwitchStage,

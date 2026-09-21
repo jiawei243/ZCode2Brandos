@@ -536,7 +536,9 @@ function nodeToTopLevelRef(
   };
 }
 
-function viewToOrderInput(params: { view: WBrandGroupedTaskView }): WBrandGroupedTaskViewOrderInput {
+function viewToOrderInput(params: {
+  view: WBrandGroupedTaskView;
+}): WBrandGroupedTaskViewOrderInput {
   return {
     workspaceScopes: collectViewWorkspaceScopes(params.view),
     topLevelNodes: params.view.nodes.map(nodeToTopLevelRef),

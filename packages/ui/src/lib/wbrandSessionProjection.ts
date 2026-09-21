@@ -171,7 +171,9 @@ function resolveSettingsThoughtLevelCurrentValue(
   return currentThoughtLevel ?? defaultThoughtLevel ?? thoughtLevel.available[0]?.value;
 }
 
-export function wbrandSessionSnapshotToTaskMeta(snapshot: WBrandSessionStateSnapshot): WBrandTaskMeta {
+export function wbrandSessionSnapshotToTaskMeta(
+  snapshot: WBrandSessionStateSnapshot,
+): WBrandTaskMeta {
   return {
     taskId: snapshot.session.sessionId,
     traceId: generateTraceId(snapshot.session.sessionId),

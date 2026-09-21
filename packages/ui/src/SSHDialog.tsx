@@ -602,7 +602,9 @@ export function RemoteConnectionDialog({
                       localPluginSyncService={baseServices.pluginSyncService}
                       remotePluginSyncService={directoryBrowserServices?.pluginSyncService ?? null}
                       localWBrandAgentService={baseServices.wbrandAgentService}
-                      remoteWBrandAgentService={directoryBrowserServices?.wbrandAgentService ?? null}
+                      remoteWBrandAgentService={
+                        directoryBrowserServices?.wbrandAgentService ?? null
+                      }
                       localWorkspacePath={localWorkspacePath}
                       selecting={selectingDirectory}
                       onSelect={(path) => {

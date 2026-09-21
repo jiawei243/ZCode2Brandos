@@ -274,8 +274,11 @@ export function createWBrandAgentConnectionScope(
     subscriptionId: string,
     connectionId: string,
   ) => `${kind}\0${workspaceKey(target)}\0${topic}\0${subscriptionId}\0${connectionId}`;
-  const ownershipKey = (kind: SubscriptionKind, target: WBrandAgentWorkspaceTarget, topic: string) =>
-    `${kind}\0${workspaceKey(target)}\0${topic}`;
+  const ownershipKey = (
+    kind: SubscriptionKind,
+    target: WBrandAgentWorkspaceTarget,
+    topic: string,
+  ) => `${kind}\0${workspaceKey(target)}\0${topic}`;
   const routedEventKey = (kind: SubscriptionKind, target: WBrandAgentWorkspaceTarget) =>
     `${kind}\0${workspaceKey(target)}`;
   const flowRouteKey = (target: WBrandAgentWorkspaceTarget, connectionId: string) =>

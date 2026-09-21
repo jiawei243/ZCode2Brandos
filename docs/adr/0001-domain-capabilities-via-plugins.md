@@ -11,13 +11,13 @@
 
 专利套件（patent-suite）全部落在已有扩展点上，打成插件经插件商店分发：
 
-| 能力 | 扩展点（已核实存在） |
-| --- | --- |
-| 撰写/解析/答复/导出技能 | `.wbrand/skills`（`packages/services/src/skills/skillsService.ts`，`.agents/skills` 兼容回退） |
-| 保密拦截/术语一致/归档 | workspace hooks 七个生命周期（`packages/shared/src/workspace-hook-config.ts`，含按工作区身份的信任模型） |
-| 撰写规范 | 案件 workspace `AGENTS.md` + 领域包 |
-| 角色分工 | subagents 服务域（`packages/services/src/subagents`） |
-| 分发与更新 | 插件商店官方市场（builtin/CDN）或私有市场 |
+| 能力                    | 扩展点（已核实存在）                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| 撰写/解析/答复/导出技能 | `.wbrand/skills`（`packages/services/src/skills/skillsService.ts`，`.agents/skills` 兼容回退）           |
+| 保密拦截/术语一致/归档  | workspace hooks 七个生命周期（`packages/shared/src/workspace-hook-config.ts`，含按工作区身份的信任模型） |
+| 撰写规范                | 案件 workspace `AGENTS.md` + 领域包                                                                      |
+| 角色分工                | subagents 服务域（`packages/services/src/subagents`）                                                    |
+| 分发与更新              | 插件商店官方市场（builtin/CDN）或私有市场                                                                |
 
 ## 理由（决策树 1–3 可行）
 

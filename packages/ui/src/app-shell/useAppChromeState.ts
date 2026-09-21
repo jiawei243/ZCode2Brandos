@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import type { DesktopWindowChromeState, IPlatformService, UpdateStatePayload } from "@wbrand/shared";
+import type {
+  DesktopWindowChromeState,
+  IPlatformService,
+  UpdateStatePayload,
+} from "@wbrand/shared";
 import { logger } from "@/logger.js";
 import { toast } from "@/components/ui/toast.js";
 import { useWBrandIntl } from "@/i18n/IntlProvider.js";

@@ -1,5 +1,9 @@
 import type { BrowserWindow, NativeImage } from "electron";
-import { DEFAULT_WBRAND_ENDPOINT_ORIGIN, buildWBrandEndpointUrls, type Locale } from "@wbrand/shared";
+import {
+  DEFAULT_WBRAND_ENDPOINT_ORIGIN,
+  buildWBrandEndpointUrls,
+  type Locale,
+} from "@wbrand/shared";
 
 interface ArchitectureMismatch {
   /** 当前运行的二进制架构，例如 x64。 */

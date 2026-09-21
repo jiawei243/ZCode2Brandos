@@ -23,7 +23,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.j
 import { Switch } from "@/components/ui/switch.js";
 import { ControlHintTooltip } from "@/ControlHintTooltip.js";
 import { TID_PLUGIN_STORE_BROWSE } from "@wbrand/shared";
-import type { WBrandPluginInfo, WBrandPluginScope, WBrandPluginUserConfigOption } from "@wbrand/shared";
+import type {
+  WBrandPluginInfo,
+  WBrandPluginScope,
+  WBrandPluginUserConfigOption,
+} from "@wbrand/shared";
 import type { CreateTaskRequest } from "@/app-shell/types.js";
 import {
   useBaseWorkspaceServices,

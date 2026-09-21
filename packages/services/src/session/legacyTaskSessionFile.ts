@@ -1,5 +1,9 @@
 import type { WBrandSessionFile, WBrandTaskMeta } from "@wbrand/shared";
-import { wbrandSessionFileSchema, wbrandTaskMetaSchema, wbrandTaskModeSchema } from "@wbrand/shared";
+import {
+  wbrandSessionFileSchema,
+  wbrandTaskMetaSchema,
+  wbrandTaskModeSchema,
+} from "@wbrand/shared";
 
 export type LegacyTaskSessionFile = Omit<WBrandSessionFile, "meta"> & {
   meta: Omit<WBrandTaskMeta, "mode"> & { mode?: WBrandTaskMeta["mode"] };

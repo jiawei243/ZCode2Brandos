@@ -7,7 +7,10 @@ import {
   wbrandApiRetryFromModelNetworkStatusPayload,
   wbrandApiRetryFromStreamRecoveryPayload,
 } from "@wbrand/shared";
-import type { WBrandSessionServiceEvent, WBrandTaskTarget } from "#src/wbrand-session/wbrandSession.js";
+import type {
+  WBrandSessionServiceEvent,
+  WBrandTaskTarget,
+} from "#src/wbrand-session/wbrandSession.js";
 
 export function createWBrandSessionApiRetryRuntimeTracker(): {
   trackApiRetryFromSessionEvent: (
@@ -114,7 +117,9 @@ function apiRetryFromSessionPayload(
   if (runtimeRetry !== undefined) {
     return runtimeRetry;
   }
-  const metaRetry = normalizeWBrandApiRetryStatus(asRecord(asRecord(payload._meta).wbrand).apiRetry);
+  const metaRetry = normalizeWBrandApiRetryStatus(
+    asRecord(asRecord(payload._meta).wbrand).apiRetry,
+  );
   if (metaRetry !== undefined) {
     return metaRetry;
   }

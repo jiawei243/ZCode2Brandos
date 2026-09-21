@@ -1,6 +1,9 @@
 import { resolveWorkspaceKey, WBRAND_AGENT_PROVIDER } from "@wbrand/shared";
 import type { TaskIndexRepo } from "#src/session/taskIndexRepo.js";
-import type { IWBrandAgentService, WBrandAgentWorkspaceTarget } from "#src/wbrand-agent/wbrandAgent.js";
+import type {
+  IWBrandAgentService,
+  WBrandAgentWorkspaceTarget,
+} from "#src/wbrand-agent/wbrandAgent.js";
 
 const IDENTITY_QUERY_BATCH_SIZE = 64;
 

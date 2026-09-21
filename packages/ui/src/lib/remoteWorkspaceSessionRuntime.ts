@@ -1,6 +1,9 @@
 import type { WBrandTaskRuntimeStatus } from "@wbrand/shared";
 import { getWorkspaceDisplayedTaskState } from "@/store/wbrandSessionStore.js";
-import type { WBrandSessionStoreState, WorkspaceWBrandUIState } from "@/store/wbrandSessionStore.js";
+import type {
+  WBrandSessionStoreState,
+  WorkspaceWBrandUIState,
+} from "@/store/wbrandSessionStore.js";
 
 interface RemoteWorkspaceRuntimeTab {
   workspacePath: string;

@@ -120,7 +120,8 @@ export class ProviderConfigService implements ProviderSource<ProviderConfigSnaps
       wbrandBuiltinRevision: wbrandBuiltin.revision,
       personalRevision: personal.revision,
       wbrandBuiltinProviders: wbrandBuiltin.providers,
-      wbrandBuiltinProviderTemplates: wbrandBuiltin.providerTemplates ?? ProviderTemplateMap.empty(),
+      wbrandBuiltinProviderTemplates:
+        wbrandBuiltin.providerTemplates ?? ProviderTemplateMap.empty(),
       personalProviders: personal.providers,
       wbrandBuiltinModelRules: wbrandBuiltin.models,
       personalModels: personal.models,
@@ -289,7 +290,11 @@ export class ProviderConfigService implements ProviderSource<ProviderConfigSnaps
     return this.#updatePersonal((current) => ({
       providers: current.providers,
       models: current.models,
-      providerOrder: normalizeProviderOrder(wbrandBuiltin.providers, current.providers, providerIds),
+      providerOrder: normalizeProviderOrder(
+        wbrandBuiltin.providers,
+        current.providers,
+        providerIds,
+      ),
     }));
   }
 

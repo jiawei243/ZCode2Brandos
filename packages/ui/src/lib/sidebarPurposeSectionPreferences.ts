@@ -13,7 +13,8 @@ const SIDEBAR_PURPOSE_SECTION_IDS = ["projects", "conversations"] as const;
 
 type SidebarPurposeSectionId = (typeof SIDEBAR_PURPOSE_SECTION_IDS)[number];
 
-const SIDEBAR_PURPOSE_SECTION_PREFERENCES_STORAGE_KEY = "wbrand-sidebar-purpose-section-preferences";
+const SIDEBAR_PURPOSE_SECTION_PREFERENCES_STORAGE_KEY =
+  "wbrand-sidebar-purpose-section-preferences";
 
 const DEFAULT_SIDEBAR_PURPOSE_SECTION_PREFERENCES: SidebarPurposeSectionPreferences = {
   projectsExpanded: true,

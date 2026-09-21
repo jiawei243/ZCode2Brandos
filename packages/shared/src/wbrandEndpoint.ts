@@ -270,7 +270,10 @@ export function buildWBrandEndpointUrls(origin: string): WBrandEndpointUrls {
   };
 }
 
-export function rewriteWBrandEndpointUrl(input: string | URL, endpointOrigin: string): string | URL {
+export function rewriteWBrandEndpointUrl(
+  input: string | URL,
+  endpointOrigin: string,
+): string | URL {
   const originalUrl = typeof input === "string" ? input : input.toString();
   let parsed: URL;
   try {

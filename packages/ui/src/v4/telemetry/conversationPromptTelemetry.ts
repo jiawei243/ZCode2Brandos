@@ -1,4 +1,8 @@
-import { WBRAND_AGENT_PROVIDER, type PlanIdentitySnapshot, type WBrandProvider } from "@wbrand/shared";
+import {
+  WBRAND_AGENT_PROVIDER,
+  type PlanIdentitySnapshot,
+  type WBrandProvider,
+} from "@wbrand/shared";
 import { buildPromptTelemetryExtraDetail } from "@/lib/messageTelemetry.js";
 import { encodeCustomModelValue } from "@/lib/wbrandCustomModelValue.js";
 import {

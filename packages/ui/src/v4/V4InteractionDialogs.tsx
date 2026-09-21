@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { WBrandElicitationRequest, WBrandPermissionOption, WBrandProvider } from "@wbrand/shared";
+import type {
+  WBrandElicitationRequest,
+  WBrandPermissionOption,
+  WBrandProvider,
+} from "@wbrand/shared";
 import type { ConversationSnapshot } from "@wbrand/shared/wbrand-protocol-v4";
 import { ElicitationDialog } from "@/ElicitationDialog.js";
 import { PermissionDialog } from "@/PermissionDialog.js";

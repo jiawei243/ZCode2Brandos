@@ -13,11 +13,11 @@
 
 WBrand 是 AI 编程工作台，提供桌面应用、浏览器界面和终端 Agent。本仓库包含客户端、后端服务、共享 UI，以及 Agent CLI 与运行时源码。
 
-| 入口                 | 用途                                                           | 开发命令                       |
-| -------------------- | -------------------------------------------------------------- | ------------------------------ |
-| Desktop              | Electron 桌面应用                                              | `pnpm dev:desktop`             |
-| Web / WBrand 命令行版 | 终端与浏览器工作台；将 TUI、Web、后端和 Agent 组装为独立运行包 | `pnpm dev:web`                 |
-| Agent CLI            | 在终端中使用 `wbrand`，也为 Desktop 和 Web 提供 Agent 运行时    | `pnpm --filter @wbrand/cli dev` |
+| 入口                  | 用途                                                           | 开发命令                        |
+| --------------------- | -------------------------------------------------------------- | ------------------------------- |
+| Desktop               | Electron 桌面应用                                              | `pnpm dev:desktop`              |
+| Web / WBrand 命令行版 | 终端与浏览器工作台；将 TUI、Web、后端和 Agent 组装为独立运行包 | `pnpm dev:web`                  |
+| Agent CLI             | 在终端中使用 `wbrand`，也为 Desktop 和 Web 提供 Agent 运行时   | `pnpm --filter @wbrand/cli dev` |
 
 ## 初始化
 
@@ -125,9 +125,9 @@ node apps/wbrand-cli/packages/cli/dist/wbrand.cjs --help
 
 根目录 [.env.example](.env.example) 提供服务地址与构建配置示例，可按需复制到 `.env`，本地覆盖放入 `.env.local`。Desktop 的开发环境通过 `dev:desktop:test` / `dev:desktop:prod` 选择。
 
-| 配置                                 | 用途                                             |
-| ------------------------------------ | ------------------------------------------------ |
-| `WBRAND_DATA_BASE_DIR`                | 应用数据基目录，数据写入其下的 `.wbrand/`         |
+| 配置                                  | 用途                                             |
+| ------------------------------------- | ------------------------------------------------ |
+| `WBRAND_DATA_BASE_DIR`                | 应用数据基目录，数据写入其下的 `.wbrand/`        |
 | `WBRAND_SERVER_WORKSPACE`             | Web 后端的工作区路径                             |
 | `WBRAND_BUILTIN_PROVIDER_CONFIG_FILE` | 本地 Provider 配置文件路径；未设置时使用内置配置 |
 | `WBRAND_DIST_BASE_URL`                | 命令行安装脚本使用的下载根地址                   |
@@ -210,12 +210,12 @@ node dist/wbrand/debug/wbrand/bin/wbrand.mjs --web \
 | `packages/desktop`                                   | Electron Main、Host、Renderer 与桌面打包   |
 | `packages/web`                                       | Web 客户端                                 |
 | `packages/server`                                    | HTTP / WebSocket 服务与远程连接            |
-| `packages/wbrand-server-cli`                          | 独立 Server 启动与进程管理                 |
+| `packages/wbrand-server-cli`                         | 独立 Server 启动与进程管理                 |
 | `packages/ui`                                        | 共享 React 组件、hooks 与 Zustand 状态     |
 | `packages/services`                                  | 业务服务与持久化                           |
 | `packages/shared`、`packages/rpc`、`packages/client` | 共享协议和类型、RPC 框架、Agent 客户端 SDK |
 | `packages/provider`、`packages/provider-node`        | Provider 公共能力与 Node 实现              |
-| `apps/wbrand-cli`                                     | Agent CLI、TUI、运行时与工具               |
+| `apps/wbrand-cli`                                    | Agent CLI、TUI、运行时与工具               |
 | `scripts`、`config`、`third-party`                   | 构建维护脚本、内置配置与第三方声明材料     |
 
 ## 项目声明

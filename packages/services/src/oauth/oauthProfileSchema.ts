@@ -24,7 +24,8 @@ function getCachedProfileSchemaVersion(profile: OAuthUserProfile): number | null
     return null;
   }
 
-  const version = (rawProfile as { wbrandProfileSchemaVersion?: unknown }).wbrandProfileSchemaVersion;
+  const version = (rawProfile as { wbrandProfileSchemaVersion?: unknown })
+    .wbrandProfileSchemaVersion;
   return typeof version === "number" ? version : null;
 }
 

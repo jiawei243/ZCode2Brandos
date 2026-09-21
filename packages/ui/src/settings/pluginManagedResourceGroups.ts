@@ -203,7 +203,10 @@ export function groupCommandsByPlugin(
   return { local, plugin };
 }
 
-export function filterLocalMcpServers(servers: WBrandMcpServer[], query: string): WBrandMcpServer[] {
+export function filterLocalMcpServers(
+  servers: WBrandMcpServer[],
+  query: string,
+): WBrandMcpServer[] {
   return servers.filter((server) => {
     if (server.source !== "wbrandagentmcp") {
       return false;

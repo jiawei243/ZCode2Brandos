@@ -14,7 +14,8 @@ export async function resolveBigModelStartPlanWbrandJwt(params: {
 }): Promise<string> {
   const activeProvider = (await params.credentialService?.load(ACTIVE_PROVIDER_KEY))?.trim() || "";
   if (params.trustCachedWbrandJwt === true || activeProvider === BIGMODEL_PROVIDER_ID) {
-    const credentialJwt = (await params.credentialService?.load(WBRAND_JWT_TOKEN_KEY))?.trim() || "";
+    const credentialJwt =
+      (await params.credentialService?.load(WBRAND_JWT_TOKEN_KEY))?.trim() || "";
     if (credentialJwt) {
       return credentialJwt;
     }

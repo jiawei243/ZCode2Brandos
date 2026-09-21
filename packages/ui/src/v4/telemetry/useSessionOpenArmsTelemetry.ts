@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef } from "react";
 import { createSessionTraceId } from "@wbrand/shared";
-import type { ConversationOpenTiming, ConversationSnapshot } from "@wbrand/shared/wbrand-protocol-v4";
+import type {
+  ConversationOpenTiming,
+  ConversationSnapshot,
+} from "@wbrand/shared/wbrand-protocol-v4";
 import {
   reportSessionOpenResult,
   reportSessionOpenStart,

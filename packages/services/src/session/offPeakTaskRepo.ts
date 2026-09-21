@@ -109,7 +109,9 @@ function rowToTask(row: OffPeakTaskRow): WBrandOffPeakTask {
   };
 }
 
-function readOffPeakModelSelection(row: OffPeakTaskRow): WBrandOffPeakTask["modelSelection"] | null {
+function readOffPeakModelSelection(
+  row: OffPeakTaskRow,
+): WBrandOffPeakTask["modelSelection"] | null {
   if (row.model_selection) {
     try {
       const parsed = modelSelectionSchema.safeParse(JSON.parse(row.model_selection));

@@ -57,7 +57,9 @@ export function getWBrandAgentAvailableModes(): WBrandTaskModeInfo[] {
   return getSharedWBrandAgentAvailableModes();
 }
 
-export function settingsToConfigOptions(settings: WBrandSessionSettingsState): WBrandConfigOption[] {
+export function settingsToConfigOptions(
+  settings: WBrandSessionSettingsState,
+): WBrandConfigOption[] {
   // service 侧曾经维护了一份三项 mode 白名单，edit 模式上线后没有同步，
   // 切换模式时 mode_update 会把 UI 菜单覆盖成 build/plan/yolo。这里统一复用 shared 的事实源。
   return wbrandSessionSettingsToWBrandConfigOptions(settings);

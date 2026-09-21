@@ -2470,7 +2470,9 @@ parentPort.on("message", async (e: Electron.MessageEvent) => {
   if (msg.type === HostMessageTypes.SessionMessageDeliveryResult) {
     const wbrandTaskService = activeServices?.getOptional(IWBrandTaskService);
     if (!wbrandTaskService) {
-      logger.warn("session message delivery result received before WBrand task service initialized");
+      logger.warn(
+        "session message delivery result received before WBrand task service initialized",
+      );
       return;
     }
     void wbrandTaskService.sendSessionMessageDeliveryResult(msg.result).catch((error) => {

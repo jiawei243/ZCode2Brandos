@@ -33,7 +33,9 @@ type SetFn = (
   partial:
     | WBrandSessionStoreState
     | Partial<WBrandSessionStoreState>
-    | ((state: WBrandSessionStoreState) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
+    | ((
+        state: WBrandSessionStoreState,
+      ) => WBrandSessionStoreState | Partial<WBrandSessionStoreState>),
 ) => void;
 
 function sortTasksByUpdatedAt(tasks: readonly WBrandTaskMeta[]): WBrandTaskMeta[] {

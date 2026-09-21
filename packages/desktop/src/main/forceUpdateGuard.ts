@@ -44,7 +44,9 @@ interface ForceUpdateGuardOptions {
   onBlocked?: (requirement: ForceUpdateRequirement) => void;
 }
 
-function resolveForceUpdateClientConfigUrl(endpointOrigin = DEFAULT_WBRAND_ENDPOINT_ORIGIN): string {
+function resolveForceUpdateClientConfigUrl(
+  endpointOrigin = DEFAULT_WBRAND_ENDPOINT_ORIGIN,
+): string {
   const url = new URL(
     `${buildWBrandEndpointUrls(endpointOrigin).origin}${WBRAND_CLIENT_CONFIG_API_PATH}`,
   );

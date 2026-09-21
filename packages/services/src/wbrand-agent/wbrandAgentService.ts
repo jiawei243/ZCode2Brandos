@@ -3986,7 +3986,9 @@ export function createWBrandAgentService(
       );
     },
 
-    async resolveSuggestedPluginReference(params: WBrandAgentResolveSuggestedPluginReferenceParams) {
+    async resolveSuggestedPluginReference(
+      params: WBrandAgentResolveSuggestedPluginReferenceParams,
+    ) {
       const client = await getPluginManagementClient();
       return client.request(
         wbrandProtocolMethods.pluginsResolveSuggestedReference,
@@ -4683,7 +4685,9 @@ export function createWBrandAgentService(
           module: "services.wbrand_agent",
           requestId: params.requestId,
         });
-        throw new Error(`WBrand session runtime preferences request not found: ${params.requestId}`);
+        throw new Error(
+          `WBrand session runtime preferences request not found: ${params.requestId}`,
+        );
       }
       const responseContext = {
         event: "wbrand_agent.runtime_preferences.host_response_received",

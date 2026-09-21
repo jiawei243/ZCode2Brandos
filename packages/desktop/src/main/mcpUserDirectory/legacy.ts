@@ -209,7 +209,14 @@ function buildLegacyCommonMcpStorageCandidates(request?: MigrateLegacyCommonMcpR
     join(appData, "WBrand", "Local Storage", "leveldb"),
     join(appData, "WBrand", "Partitions", "wbrand-embedded-browser", "Local Storage", "leveldb"),
     join(appData, "WBrand Dev", "Local Storage", "leveldb"),
-    join(appData, "WBrand Dev", "Partitions", "wbrand-embedded-browser", "Local Storage", "leveldb"),
+    join(
+      appData,
+      "WBrand Dev",
+      "Partitions",
+      "wbrand-embedded-browser",
+      "Local Storage",
+      "leveldb",
+    ),
   );
 
   return Array.from(new Set(candidates));

@@ -32,7 +32,8 @@ function loadEnvFiles(): Record<string, string> {
   // 真实环境变量优先级最高
   if (process.env.WBRAND_ENV) vars.WBRAND_ENV = process.env.WBRAND_ENV;
   if (process.env.WBRAND_BASE_URL) vars.WBRAND_BASE_URL = process.env.WBRAND_BASE_URL;
-  if (process.env.VITE_WBRAND_BASE_URL) vars.VITE_WBRAND_BASE_URL = process.env.VITE_WBRAND_BASE_URL;
+  if (process.env.VITE_WBRAND_BASE_URL)
+    vars.VITE_WBRAND_BASE_URL = process.env.VITE_WBRAND_BASE_URL;
   // OAuth origin/client_id 由 host runtime 读取；这里保留覆盖入口，方便开发构建时观察统一 env 来源。
   if (process.env.ZAI_OAUTH_CLIENT_ID) vars.ZAI_OAUTH_CLIENT_ID = process.env.ZAI_OAUTH_CLIENT_ID;
   if (process.env.ZAI_OAUTH_ORIGIN) vars.ZAI_OAUTH_ORIGIN = process.env.ZAI_OAUTH_ORIGIN;

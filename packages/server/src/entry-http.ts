@@ -11,7 +11,8 @@ async function main(): Promise<void> {
     content: readBundledWBrandBuiltinProviderConfig(),
   });
   const port = Number(process.env["PORT"]) || 3030;
-  const host = process.env["WBRAND_SERVER_HOST"]?.trim() || process.env["HOST"]?.trim() || undefined;
+  const host =
+    process.env["WBRAND_SERVER_HOST"]?.trim() || process.env["HOST"]?.trim() || undefined;
   const staticRoot = process.env["WBRAND_WEB_STATIC_ROOT"]?.trim() || undefined;
   const authToken = process.env["WBRAND_SERVER_AUTH_TOKEN"]?.trim() || undefined;
   const services = createLocalServices({

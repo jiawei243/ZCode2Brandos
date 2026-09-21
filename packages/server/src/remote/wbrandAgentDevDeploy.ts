@@ -240,7 +240,9 @@ async function shouldSkipDevelopmentWBrandAgentDeploy(params: {
     return false;
   }
 
-  params.loggers.log(`[wbrand-agent-deploy] ${WBRAND_AGENT_PROVIDER}: 开发态 wbrand.cjs 未变化，跳过`);
+  params.loggers.log(
+    `[wbrand-agent-deploy] ${WBRAND_AGENT_PROVIDER}: 开发态 wbrand.cjs 未变化，跳过`,
+  );
   return true;
 }
 

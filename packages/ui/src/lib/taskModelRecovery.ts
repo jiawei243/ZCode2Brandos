@@ -67,7 +67,10 @@ function resolveModelOptionName(modelValue: string): string {
   return customModel?.modelName?.trim() || providerQualifiedModel?.modelName || modelValue;
 }
 
-function ensureModelOptionValue(option: WBrandConfigOption, modelValue: string): WBrandConfigOption {
+function ensureModelOptionValue(
+  option: WBrandConfigOption,
+  modelValue: string,
+): WBrandConfigOption {
   const options = option.options ?? [];
   const hasOption = options.some((candidate) => candidate.value === modelValue);
   if (hasOption && option.currentValue === modelValue) {

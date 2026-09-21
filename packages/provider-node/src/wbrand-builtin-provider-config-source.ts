@@ -61,7 +61,9 @@ export class NodeWBrandBuiltinProviderConfigSource implements ProviderSource<Pro
     return snapshotFromRelease(release, this.#sourceKey);
   }
 
-  async applyRemoteRelease(release: WBrandBuiltinRelease): Promise<ApplyWBrandBuiltinReleaseResult> {
+  async applyRemoteRelease(
+    release: WBrandBuiltinRelease,
+  ): Promise<ApplyWBrandBuiltinReleaseResult> {
     this.#assertNotDisposed();
     await this.#ensureWatcher();
     const result = await withFileLock(this.#activeFilePath, async () => {

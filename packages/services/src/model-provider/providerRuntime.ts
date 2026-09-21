@@ -86,7 +86,10 @@ export class ProviderRuntime {
         this.configService.read(),
         accountSource.read(),
       ]);
-      if (!this.#disposed && config.wbrandBuiltinRevision !== account.basedOnWBrandBuiltinRevision) {
+      if (
+        !this.#disposed &&
+        config.wbrandBuiltinRevision !== account.basedOnWBrandBuiltinRevision
+      ) {
         await accountSource.refresh?.("builtin-account-recovery");
       }
     });

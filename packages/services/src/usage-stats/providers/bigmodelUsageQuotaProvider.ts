@@ -1563,7 +1563,9 @@ function addDaysToDateKey(dateKey: string, days: number): string {
 }
 
 function resolveQuotaUrlFromEnv(env: NodeJS.ProcessEnv): string | undefined {
-  return readEnv(env, "WBRAND_BIGMODEL_USAGE_QUOTA_URL") ?? readEnv(env, "BIGMODEL_USAGE_QUOTA_URL");
+  return (
+    readEnv(env, "WBRAND_BIGMODEL_USAGE_QUOTA_URL") ?? readEnv(env, "BIGMODEL_USAGE_QUOTA_URL")
+  );
 }
 
 function resolveCodingPlanApiKeyError(providerId: string | undefined): string {

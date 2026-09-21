@@ -40,7 +40,10 @@ import {
   ShieldCheckIcon,
   type LucideIcon,
 } from "lucide-react";
-import { WBRAND_MODE_OPTION_DESCRIPTION_IDS, WBRAND_MODE_OPTION_LABEL_IDS } from "./display-help.js";
+import {
+  WBRAND_MODE_OPTION_DESCRIPTION_IDS,
+  WBRAND_MODE_OPTION_LABEL_IDS,
+} from "./display-help.js";
 import { RollingToolbarLabel } from "@/chat-input-toolbar/RollingToolbarLabel.js";
 
 export {

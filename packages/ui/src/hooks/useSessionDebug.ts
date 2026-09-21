@@ -35,7 +35,8 @@ export function useSessionDebug({
           workspaceIdentity,
           sessionId: taskId,
         });
-        if (!disposed) setResult({ key: scopeKey, service: wbrandAgentService, data, error: false });
+        if (!disposed)
+          setResult({ key: scopeKey, service: wbrandAgentService, data, error: false });
       } catch {
         if (!disposed)
           setResult((previous) => ({

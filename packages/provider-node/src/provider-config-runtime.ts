@@ -130,7 +130,9 @@ export class NodeProviderConfigRuntime {
     return startPromise;
   }
 
-  refreshWBrandBuiltin(options?: { readonly force?: boolean }): Promise<WBrandBuiltinRefreshResult> {
+  refreshWBrandBuiltin(options?: {
+    readonly force?: boolean;
+  }): Promise<WBrandBuiltinRefreshResult> {
     if (this.#disposed) return Promise.resolve("disposed");
     if (this.#wbrandBuiltinSource instanceof EndpointScopedWBrandBuiltinSource) {
       return this.#wbrandBuiltinSource.refresh(options);

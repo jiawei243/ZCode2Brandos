@@ -1445,7 +1445,10 @@ export const wbrandSessionEventSchema = z.discriminatedUnion("type", [
   wbrandSessionEventEnvelopeFor("session.created", wbrandSessionCreatedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("session.resumed", wbrandSessionResumedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("session.updated", jsonObjectSchema),
-  wbrandSessionEventEnvelopeFor("session.titleUpdated", wbrandSessionTitleUpdatedEventPayloadSchema),
+  wbrandSessionEventEnvelopeFor(
+    "session.titleUpdated",
+    wbrandSessionTitleUpdatedEventPayloadSchema,
+  ),
   wbrandSessionEventEnvelopeFor("session.closed", wbrandSessionClosedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("turn.started", wbrandTurnStartedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("turn.steerQueued", wbrandTurnSteerQueuedEventPayloadSchema),
@@ -1460,7 +1463,10 @@ export const wbrandSessionEventSchema = z.discriminatedUnion("type", [
   wbrandSessionEventEnvelopeFor("part.removed", wbrandMessagePartRemovedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("model.streaming", wbrandModelStreamingEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("tool.updated", wbrandToolUpdatedEventPayloadSchema),
-  wbrandSessionEventEnvelopeFor("permission.requested", wbrandPermissionRequestedEventPayloadSchema),
+  wbrandSessionEventEnvelopeFor(
+    "permission.requested",
+    wbrandPermissionRequestedEventPayloadSchema,
+  ),
   wbrandSessionEventEnvelopeFor("permission.resolved", wbrandPermissionResolvedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("userInput.requested", wbrandUserInputRequestedEventPayloadSchema),
   wbrandSessionEventEnvelopeFor("userInput.resolved", wbrandUserInputResolvedEventPayloadSchema),
@@ -1697,7 +1703,9 @@ export const DEFAULT_WBRAND_MODEL_CONTEXT_BUDGET_STRATEGY = "preflight-v1" as co
 
 // 3.12.2：legacy 仅为旧协议接收兼容；Runtime 一律归一为上面的共享默认策略。
 export const wbrandModelContextBudgetStrategySchema = z.enum(["legacy", "preflight-v1"]);
-export type WBrandModelContextBudgetStrategy = z.infer<typeof wbrandModelContextBudgetStrategySchema>;
+export type WBrandModelContextBudgetStrategy = z.infer<
+  typeof wbrandModelContextBudgetStrategySchema
+>;
 
 export const wbrandSessionRuntimePreferencesResultSchema = z
   .object({
@@ -2659,7 +2667,9 @@ export const wbrandSkillReferenceCatalogEntrySchema = z
     pluginName: nonEmptyString.optional(),
   })
   .strict();
-export type WBrandSkillReferenceCatalogEntry = z.infer<typeof wbrandSkillReferenceCatalogEntrySchema>;
+export type WBrandSkillReferenceCatalogEntry = z.infer<
+  typeof wbrandSkillReferenceCatalogEntrySchema
+>;
 
 export const wbrandSkillsReferenceCatalogParamsSchema = z
   .object({
@@ -2740,7 +2750,9 @@ export const wbrandSavedWorkflowFailureReasonSchema = z.enum([
   "parse_error",
   "read_error",
 ]);
-export type WBrandSavedWorkflowFailureReason = z.infer<typeof wbrandSavedWorkflowFailureReasonSchema>;
+export type WBrandSavedWorkflowFailureReason = z.infer<
+  typeof wbrandSavedWorkflowFailureReasonSchema
+>;
 const wbrandSavedWorkflowFailureSchema = z
   .object({
     ok: z.literal(false),
@@ -3332,7 +3344,9 @@ export const wbrandAutomationScheduleRuleSchema = z
     monthlyMode: z.enum(["date", "weekday"]).optional(),
   })
   .strict();
-export type WBrandAutomationScheduleRuleProtocol = z.infer<typeof wbrandAutomationScheduleRuleSchema>;
+export type WBrandAutomationScheduleRuleProtocol = z.infer<
+  typeof wbrandAutomationScheduleRuleSchema
+>;
 
 /** 会话侧长间隔周期 carrier 的 unit 枚举（与 scheduleRule.unit 同集）。 */
 export const wbrandAutomationIntervalUnitSchema = z.enum([
@@ -3402,12 +3416,16 @@ export const wbrandAutomationCreateParamsSchema = z
     message: "intervalUnit is a recurring carrier and cannot combine with maxRuns",
     path: ["maxRuns"],
   });
-export type WBrandAutomationCreateProtocolParams = z.infer<typeof wbrandAutomationCreateParamsSchema>;
+export type WBrandAutomationCreateProtocolParams = z.infer<
+  typeof wbrandAutomationCreateParamsSchema
+>;
 
 export const wbrandAutomationCreateResultSchema = z
   .object({ automation: wbrandAutomationProtocolSchema })
   .strict();
-export type WBrandAutomationCreateProtocolResult = z.infer<typeof wbrandAutomationCreateResultSchema>;
+export type WBrandAutomationCreateProtocolResult = z.infer<
+  typeof wbrandAutomationCreateResultSchema
+>;
 
 export const wbrandAutomationUpdateParamsSchema = z
   .object({
@@ -3460,11 +3478,15 @@ export const wbrandAutomationUpdateParamsSchema = z
       path: ["maxRuns"],
     },
   );
-export type WBrandAutomationUpdateProtocolParams = z.infer<typeof wbrandAutomationUpdateParamsSchema>;
+export type WBrandAutomationUpdateProtocolParams = z.infer<
+  typeof wbrandAutomationUpdateParamsSchema
+>;
 export const wbrandAutomationUpdateResultSchema = z
   .object({ automation: wbrandAutomationProtocolSchema })
   .strict();
-export type WBrandAutomationUpdateProtocolResult = z.infer<typeof wbrandAutomationUpdateResultSchema>;
+export type WBrandAutomationUpdateProtocolResult = z.infer<
+  typeof wbrandAutomationUpdateResultSchema
+>;
 
 export const wbrandAutomationListParamsSchema = z.object({}).strict();
 export type WBrandAutomationListProtocolParams = z.infer<typeof wbrandAutomationListParamsSchema>;
@@ -3489,9 +3511,13 @@ export type WBrandAutomationCheckTaskBindingProtocolResult = z.infer<
 export const wbrandAutomationDeleteParamsSchema = z
   .object({ automationId: nonEmptyString })
   .strict();
-export type WBrandAutomationDeleteProtocolParams = z.infer<typeof wbrandAutomationDeleteParamsSchema>;
+export type WBrandAutomationDeleteProtocolParams = z.infer<
+  typeof wbrandAutomationDeleteParamsSchema
+>;
 export const wbrandAutomationDeleteResultSchema = z.object({ deleted: z.boolean() }).strict();
-export type WBrandAutomationDeleteProtocolResult = z.infer<typeof wbrandAutomationDeleteResultSchema>;
+export type WBrandAutomationDeleteProtocolResult = z.infer<
+  typeof wbrandAutomationDeleteResultSchema
+>;
 
 // ---- Off-Peak（闲时任务）会话内创建协议----
 // 与 automation 兄弟并列（独立域，禁止互相复用标记/表）。workspace 由 host 端从
@@ -3663,7 +3689,8 @@ export const wbrandProtocolMethods = {
   interactionBrowserExecute: "interaction/browserExecute",
 } as const;
 
-export type WBrandProtocolMethod = (typeof wbrandProtocolMethods)[keyof typeof wbrandProtocolMethods];
+export type WBrandProtocolMethod =
+  (typeof wbrandProtocolMethods)[keyof typeof wbrandProtocolMethods];
 
 export const wbrandProtocolEmptyResultSchema = z.object({}).strict();
 

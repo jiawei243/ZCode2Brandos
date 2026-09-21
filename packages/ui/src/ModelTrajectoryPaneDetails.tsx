@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
-import type { WBrandModelTrajectoryContentPart, WBrandModelTrajectoryRecord } from "@wbrand/services";
+import type {
+  WBrandModelTrajectoryContentPart,
+  WBrandModelTrajectoryRecord,
+} from "@wbrand/services";
 import { Badge } from "@/components/ui/badge.js";
 import { cn } from "@/components/lib/utils.js";
 import type { useWBrandIntl } from "@/i18n/IntlProvider.js";

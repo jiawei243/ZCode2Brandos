@@ -43,7 +43,10 @@ export { type SettingsSectionId };
 export { createSettingsPageConfig, resolveSettingsSectionForPlatform };
 
 const TASK_AUTO_ARCHIVE_DAY_OPTIONS = [3, 7, 14, 30] as const;
-const WBRAND_INTERACTION_BEHAVIOR_OPTIONS: readonly WBrandInteractionBehavior[] = ["queue", "guide"];
+const WBRAND_INTERACTION_BEHAVIOR_OPTIONS: readonly WBrandInteractionBehavior[] = [
+  "queue",
+  "guide",
+];
 
 export function GeneralSectionContent({
   localePreference,

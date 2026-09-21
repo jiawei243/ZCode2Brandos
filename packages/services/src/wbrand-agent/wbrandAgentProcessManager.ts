@@ -780,7 +780,9 @@ export class WBrandAgentProcessManager {
     return cleanupPromise;
   }
 
-  private async cleanupManagedProcessForShutdown(managed: ManagedWBrandAgentProcess): Promise<void> {
+  private async cleanupManagedProcessForShutdown(
+    managed: ManagedWBrandAgentProcess,
+  ): Promise<void> {
     await this.cleanupManagedProcessWithRetry(
       managed,
       "manager-dispose",

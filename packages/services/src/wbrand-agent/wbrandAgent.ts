@@ -601,7 +601,9 @@ export interface IWBrandAgentService {
   grantWorkspaceHookTrust(
     params: WBrandAgentGrantWorkspaceHookTrustParams,
   ): Promise<WBrandWorkspaceHookTrustGrantResult>;
-  listMcpServerStatuses(params: WBrandAgentListMcpServerStatusesParams): Promise<WBrandMcpListResult>;
+  listMcpServerStatuses(
+    params: WBrandAgentListMcpServerStatusesParams,
+  ): Promise<WBrandMcpListResult>;
   listPlugins(params: WBrandAgentPluginViewParams): Promise<WBrandPluginsListResult>;
   /**
    * Plugin 对话引用 catalog：session-scoped 只读投影。
@@ -616,7 +618,9 @@ export interface IWBrandAgentService {
   ): Promise<WBrandSkillsReferenceCatalogResult>;
   // 已保存工作流的 GUI 中枢：workspace 级、无会话，每次调用现扫 `<cwd>/.wbrand/workflows/`。
   // 全局档传 `scope: "global"`：带 workspace 就用它当载体，不带则由 services 层自选本机载体运行时。
-  listSavedWorkflows(params: WBrandAgentListSavedWorkflowsParams): Promise<WBrandWorkflowsListResult>;
+  listSavedWorkflows(
+    params: WBrandAgentListSavedWorkflowsParams,
+  ): Promise<WBrandWorkflowsListResult>;
   getSavedWorkflow(params: WBrandAgentGetSavedWorkflowParams): Promise<WBrandWorkflowsGetResult>;
   updateSavedWorkflowMeta(
     params: WBrandAgentUpdateSavedWorkflowMetaParams,
@@ -669,7 +673,9 @@ export interface IWBrandAgentService {
   ): Promise<WBrandPluginsConfigureResult>;
   validatePlugin(params: WBrandAgentValidatePluginParams): Promise<WBrandPluginsValidateResult>;
   describePlugin(params: WBrandAgentDescribePluginParams): Promise<WBrandPluginsDescribeResult>;
-  setPluginEnabled(params: WBrandAgentSetPluginEnabledParams): Promise<WBrandPluginsSetEnabledResult>;
+  setPluginEnabled(
+    params: WBrandAgentSetPluginEnabledParams,
+  ): Promise<WBrandPluginsSetEnabledResult>;
   // ---- 定时任务(automation)管理 ----
   listAutomations(params: WBrandAgentWorkspaceTarget): Promise<WBrandAutomation[]>;
   listAllAutomations(): Promise<WBrandAutomation[]>;
@@ -678,7 +684,9 @@ export interface IWBrandAgentService {
   deleteAutomation(params: WBrandAgentAutomationIdParams): Promise<void>;
   setAutomationEnabled(params: WBrandAgentSetAutomationEnabledParams): Promise<void>;
   restartAutomation(params: WBrandAgentAutomationIdParams): Promise<void>;
-  runAutomationNow(params: WBrandAgentAutomationIdParams): Promise<WBrandAgentRunAutomationNowResult>;
+  runAutomationNow(
+    params: WBrandAgentAutomationIdParams,
+  ): Promise<WBrandAgentRunAutomationNowResult>;
   listAutomationRuns(params: WBrandAgentAutomationIdParams): Promise<WBrandAutomationRun[]>;
   deleteAutomationRun(params: WBrandAgentDeleteAutomationRunParams): Promise<void>;
   generateWorkspaceText(
@@ -786,7 +794,9 @@ export interface IWBrandAgentService {
   queryConversationCommandsV4(params: WBrandAgentCommandsQueryParams): Promise<CommandsQueryResult>;
   attachmentBeginV4(params: WBrandAgentAttachmentBeginParams): Promise<V4AttachmentBeginResult>;
   attachmentChunkV4(params: WBrandAgentAttachmentChunkParams): Promise<V4AttachmentChunkResult>;
-  attachmentCommitV4(params: WBrandAgentAttachmentTerminalParams): Promise<V4AttachmentCommitResult>;
+  attachmentCommitV4(
+    params: WBrandAgentAttachmentTerminalParams,
+  ): Promise<V4AttachmentCommitResult>;
   attachmentAbortV4(params: WBrandAgentAttachmentTerminalParams): Promise<void>;
   /** Desktop local 已发送视频 source query；远端与 Web 返回 chunked。 */
   attachmentPreviewSourceV4(

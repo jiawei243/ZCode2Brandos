@@ -85,7 +85,9 @@ export interface IPluginManagementService {
   ): Promise<WBrandPluginsConfigureResult>;
   validatePlugin(params: WBrandAgentValidatePluginParams): Promise<WBrandPluginsValidateResult>;
   describePlugin(params: WBrandAgentDescribePluginParams): Promise<WBrandPluginsDescribeResult>;
-  setPluginEnabled(params: WBrandAgentSetPluginEnabledParams): Promise<WBrandPluginsSetEnabledResult>;
+  setPluginEnabled(
+    params: WBrandAgentSetPluginEnabledParams,
+  ): Promise<WBrandPluginsSetEnabledResult>;
 }
 
 export const IPluginManagementService = createServiceDescriptor<IPluginManagementService>(

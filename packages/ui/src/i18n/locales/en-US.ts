@@ -61,7 +61,8 @@ const enUS: Record<string, string> = {
   "occupationOnboarding.migration": "Migrate conversations",
   "occupationOnboarding.migrationDescription": "Migrate conversation history from Claude Code",
   "occupationOnboarding.memory": "Enable Workspace Memory",
-  "occupationOnboarding.memoryDescription": "Let WBrand remember your preferences and work context.",
+  "occupationOnboarding.memoryDescription":
+    "Let WBrand remember your preferences and work context.",
   "occupationOnboarding.suggestions": "Enable proactive task suggestions",
   "occupationOnboarding.suggestionsDescription":
     "Show suggestions in new conversations. Click to fill the composer.",
@@ -3230,7 +3231,8 @@ const enUS: Record<string, string> = {
   "sidebar.usage.plan.toolCalls": "Tool calls",
   "sidebar.usage.plan.mcp": "WBrand MCP",
   "sidebar.usage.plan.wbrandMcp": "WBrand MCP",
-  "sidebar.usage.plan.wbrandMcpDescription": "Daily aggregate quota for WBrand built-in plugin MCPs",
+  "sidebar.usage.plan.wbrandMcpDescription":
+    "Daily aggregate quota for WBrand built-in plugin MCPs",
   "chat.planUsage.title": "Plan usage",
   "chat.planUsage.titleWithPlan": "{plan} Plan usage",
   "chat.planUsage.providerFallback": "Current provider",
@@ -3998,7 +4000,8 @@ const enUS: Record<string, string> = {
   "settings.workspaceFileSearch.transformFailed":
     "Failed to apply the section operation; check the logs",
   "settings.workspaceFileSearch.reveal": "Reveal file location",
-  "settings.workspaceFileSearch.revealHint": "Save first; .wbrandignore lives at the workspace root",
+  "settings.workspaceFileSearch.revealHint":
+    "Save first; .wbrandignore lives at the workspace root",
   "settings.workspaceFileSearch.unsaved": "Unsaved changes",
   "settings.workspaceFileSearch.noWorkspace":
     "No workspace is open, so search ignore rules cannot be configured.",
@@ -5588,7 +5591,8 @@ const enUS: Record<string, string> = {
   // WBrand Agent
   "wbrand.unavailable": "AI agent not available",
   "wbrand.initFailed": "Failed to start AI agent",
-  "wbrand.error.TASK_OWNED_BY_OTHER_HOST": "This task is already running in another connected view.",
+  "wbrand.error.TASK_OWNED_BY_OTHER_HOST":
+    "This task is already running in another connected view.",
   "wbrand.error.STALE_TASK_OWNER_COMMAND": "This action belongs to an older run and was ignored.",
   "wbrand.error.NO_ACTIVE_TASK_OWNER": "No active task owner is available for this action.",
   "wbrand.error.OWNER_COMMAND_FAILED": "The task owner could not complete this action.",
