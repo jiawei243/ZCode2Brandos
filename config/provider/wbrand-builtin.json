@@ -744,7 +744,7 @@
             },
             "api": {
               "type": "anthropic-messages",
-              "baseUrl": "https://wbrand.z.ai/api/v1/wbrand-plan/anthropic"
+              "baseUrl": "https://zcode.z.ai/api/v1/wbrand-plan/anthropic"
             },
             "logo": {
               "type": "builtin",
@@ -807,7 +807,7 @@
             },
             "api": {
               "type": "anthropic-messages",
-              "baseUrl": "https://wbrand.z.ai/api/v1/wbrand-plan/anthropic"
+              "baseUrl": "https://zcode.z.ai/api/v1/wbrand-plan/anthropic"
             },
             "logo": {
               "type": "builtin",
@@ -829,7 +829,7 @@
             },
             "api": {
               "type": "anthropic-messages",
-              "baseUrl": "https://wbrand.z.ai/api/v1/off-peak/anthropic"
+              "baseUrl": "https://zcode.z.ai/api/v1/off-peak/anthropic"
             },
             "logo": {
               "type": "builtin",
@@ -851,7 +851,7 @@
             },
             "api": {
               "type": "anthropic-messages",
-              "baseUrl": "https://wbrand.z.ai/api/v1/off-peak/anthropic"
+              "baseUrl": "https://zcode.z.ai/api/v1/off-peak/anthropic"
             },
             "logo": {
               "type": "builtin",

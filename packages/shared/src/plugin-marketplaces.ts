@@ -34,7 +34,7 @@ export const DEFAULT_PLUGIN_MARKETPLACES: DefaultPluginMarketplace[] = [
     // WBrand 官方唯一市场：本地 seed 分片与 CDN 分片在 Agent storage 内合并。
     // CDN manifest 的 name 必须与该 canonical id 一致。
     id: WBRAND_OFFICIAL_PLUGIN_MARKETPLACE_ID,
-    source: "https://cdn-wbrand.z.ai/wbrand/official-plugin/marketplace.json",
+    source: "https://cdn-zcode.z.ai/wbrand/official-plugin/marketplace.json",
     name: WBRAND_OFFICIAL_PLUGIN_MARKETPLACE_ID,
     description: "Official WBrand plugins marketplace: built-in and community plugins for WBrand.",
     pluginCount: 0,

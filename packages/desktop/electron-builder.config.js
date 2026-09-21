@@ -456,10 +456,10 @@ export default {
   extraMetadata: {
     version: buildMetadata.appVersion,
     wbrandProductFlavor: desktopProductIdentity.flavor,
-    homepage: "https://wbrand.z.ai",
+    homepage: "https://zcode.z.ai",
     author: {
       name: "WBrand",
-      email: "dev@wbrand.z.ai",
+      email: "dev@zcode.z.ai",
     },
   },
   // macOS 签名阶段会对 Electron Framework 下每个语言包逐个 codesign。
@@ -700,7 +700,7 @@ export default {
     // 与 /usr/share/icons/hicolor/*/apps/wbrand.png 保持一致。
     executableName: desktopProductIdentity.linuxExecutableName,
     category: "Development",
-    maintainer: "WBrand <dev@wbrand.z.ai>",
+    maintainer: "WBrand <dev@zcode.z.ai>",
   },
   deb: {
     // 生产版与 Preview 必须是两个 dpkg package；只改可执行名仍会让安装器把另一版本当成升级替换。

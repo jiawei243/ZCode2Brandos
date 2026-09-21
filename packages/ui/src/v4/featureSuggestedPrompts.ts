@@ -8,7 +8,7 @@ import presentationsIcon from "@/assets/plugin-icons/presentations.png";
 import spreadsheetsIcon from "@/assets/plugin-icons/spreadsheets.png";
 import type { DraftSuggestedPromptItem } from "@/v4/draftSuggestedPromptItems.js";
 
-const ASSETS = "https://cdn-wbrand.z.ai/wbrand/official-plugin/assets";
+const ASSETS = "https://cdn-zcode.z.ai/wbrand/official-plugin/assets";
 
 type FeatureRecommendedPrompt = DraftSuggestedPromptItem & {
   mode: "office" | "coding";

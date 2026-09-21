@@ -10,7 +10,7 @@ import type { EnvRecord } from "./model-execution.js";
  *
  * 只对下表中的官方端点生效，按协议、主机、端口、路径精确匹配，用户自建 provider 与
  * 第三方模型服务不受影响。网关 origin 跟随 WBRAND_BASE_URL / WBRAND_ENDPOINT_ORIGIN，
- * 缺省为线上 https://wbrand.z.ai。
+ * 缺省为线上 https://zcode.z.ai。
  */
 export interface OfficialCodingPlanGatewayRoute {
   /** 官方模型端点（含路径），仅 https。 */

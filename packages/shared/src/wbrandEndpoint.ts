@@ -1,6 +1,6 @@
 import type { WBrandEnv } from "./env.js";
 
-export const DEFAULT_WBRAND_ENDPOINT_ORIGIN = "https://wbrand.z.ai";
+export const DEFAULT_WBRAND_ENDPOINT_ORIGIN = "https://zcode.z.ai";
 export const DEFAULT_BIGMODEL_API_ORIGIN = "https://bigmodel.cn";
 export const DEFAULT_ZAI_OAUTH_ORIGIN = "https://chat.z.ai";
 export const DEFAULT_ZAI_BUSINESS_BASE_URL = "https://api.z.ai";

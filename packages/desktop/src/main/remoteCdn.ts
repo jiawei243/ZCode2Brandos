@@ -1,7 +1,7 @@
 import { WBRAND_VERSION, type WBrandEnv } from "@wbrand/shared";
 
 declare const __WBRAND_CDN_BASE_URL__: string | undefined;
-const DEFAULT_CDN_BASE_URL = "https://cdn-wbrand.z.ai";
+const DEFAULT_CDN_BASE_URL = "https://cdn-zcode.z.ai";
 
 export interface ResolveRemoteCdnOptions {
   env?: WBrandEnv;
