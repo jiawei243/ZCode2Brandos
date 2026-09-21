@@ -1,4 +1,4 @@
-/* eslint-disable max-lines -- Coding Plan provider 需要集中维护 BigModel 支付宝与 Z.ai Stripe/PayPal 接口映射，拆分会让共享鉴权和响应解包更难追踪。 */
+/* eslint-disable max-lines -- Coding Plan provider 需要集中维护 BigModel 支付宝与 Unew.cc Stripe/PayPal 接口映射，拆分会让共享鉴权和响应解包更难追踪。 */
 import type {
   ApiClient,
   ApiRequestInit,
@@ -48,28 +48,28 @@ import type {
   EnterpriseCodingPlanProjectApiKeyUnavailableReason,
   EnterpriseCodingPlanProjectContext,
   StartPlanPreviewConfig,
-  ZCodeModelContextBudgetStrategy,
+  WBrandModelContextBudgetStrategy,
   DynamicWorkflowClientConfig,
-} from "@zcode/shared";
-import type { ModelSelectionView } from "@zcode/provider";
+} from "@wbrand/shared";
+import type { ModelSelectionView } from "@wbrand/provider";
 import type { OffPeakClientConfig } from "./codingPlanSubscription.js";
 import {
   BIGMODEL_PROVIDER_ID,
   BUILTIN_MODEL_PROVIDER_IDS,
   CODING_PLAN_SYSTEM_BUSY,
-  buildRuntimeZCodeApiUrl,
+  buildRuntimeWBrandApiUrl,
   isZaiCodingPlanProviderId,
   resolveBigModelApiOrigin,
   resolveZaiBusinessBaseUrl,
   ZAI_PROVIDER_ID,
-  ZCODE_VERSION,
-  DEFAULT_ZCODE_MODEL_CONTEXT_BUDGET_STRATEGY,
+  WBRAND_VERSION,
+  DEFAULT_WBRAND_MODEL_CONTEXT_BUDGET_STRATEGY,
   createDynamicWorkflowClientConfig,
   normalizeDynamicWorkflowMode,
   resolveDynamicWorkflowClientConfig,
   DEFAULT_DYNAMIC_WORKFLOW_MODE,
-  ZCODE_DYNAMIC_WORKFLOW_MODE_ENV,
-} from "@zcode/shared";
+  WBRAND_DYNAMIC_WORKFLOW_MODE_ENV,
+} from "@wbrand/shared";
 import type { ICredentialService } from "../credential/credential.js";
 import { readApiJson } from "../providers/api/apiJson.js";
 import { createServiceLogger } from "../logger/serviceLogger.js";
@@ -81,11 +81,11 @@ import {
 
 const BIGMODEL_CODING_PLAN_API_PREFIX = "/api/biz";
 const ZAI_CODING_PLAN_PAY_API_PREFIX = "/api/pay";
-const ZCODE_CLIENT_CONFIG_API_PREFIX = "/api/v1/client/configs";
+const WBRAND_CLIENT_CONFIG_API_PREFIX = "/api/v1/client/configs";
 const REQUEST_TIMEOUT_MS = 15_000;
 const CLIENT_CONFIG_CACHE_TTL_MS = 60 * 60 * 1000;
 const CODING_PLAN_ZAI_OVERSEAS_PAYMENT_REQUIRED = "coding_plan_zai_overseas_payment_required";
-const ZCODE_JWT_TOKEN_KEY = "zcodejwttoken";
+const WBRAND_JWT_TOKEN_KEY = "wbrandjwttoken";
 const log = createServiceLogger("codingPlanSubscription");
 
 interface RemoteEnvelope<T> {
@@ -95,7 +95,7 @@ interface RemoteEnvelope<T> {
   data?: T | null;
 }
 
-interface ZCodeClientConfigEnvelope {
+interface WBrandClientConfigEnvelope {
   code?: number;
   msg?: string;
   success?: boolean;
@@ -155,9 +155,9 @@ export class BigModelCodingPlanSubscriptionProvider {
   protected readonly apiClient: ApiClient;
   protected readonly credentialService: Pick<ICredentialService, "load">;
   private readonly resolveOffPeakModelSelectionView?: () => Promise<ModelSelectionView>;
-  private clientConfigSnapshot: ZCodeClientConfigEnvelope | null = null;
+  private clientConfigSnapshot: WBrandClientConfigEnvelope | null = null;
   private clientConfigSnapshotExpiresAt = 0;
-  private clientConfigRequest: Promise<ZCodeClientConfigEnvelope> | null = null;
+  private clientConfigRequest: Promise<WBrandClientConfigEnvelope> | null = null;
 
   constructor(options: BigModelCodingPlanSubscriptionProviderOptions) {
     this.apiClient = options.apiClient;
@@ -219,7 +219,7 @@ export class BigModelCodingPlanSubscriptionProvider {
    * forceRefresh 供"打开 Automations 入口补拉"（1h 快照否则灰度翻转最长 1h 不可见）。
    */
   async getOffPeakClientConfig(options?: { forceRefresh?: boolean }): Promise<OffPeakClientConfig> {
-    if (process.env["ZCODE_OFFPEAK_MOCK"] === "1") {
+    if (process.env["WBRAND_OFFPEAK_MOCK"] === "1") {
       // mock 已经明确替代远端曝光配置，不能再先等待 /client/configs：
       // 离线 Desktop E2E 会一直停在 Loading，根本无法进入闲时执行链。
       const modelSelectionView = await this.resolveOffPeakModelSelectionView?.();
@@ -237,7 +237,7 @@ export class BigModelCodingPlanSubscriptionProvider {
   /**
    * 动态工作流灰度快照：与闲时任务同走
    * client/configs，零新增请求。三条边界：
-   *   1. 本地覆盖（ZCODE_DYNAMIC_WORKFLOW_MODE）在任何网络动作之前裁决，命中即返回——
+   *   1. 本地覆盖（WBRAND_DYNAMIC_WORKFLOW_MODE）在任何网络动作之前裁决，命中即返回——
    *      preview 构建和开发者手测因此不受 1h 快照与首次 Host 竞态影响；
    *   2. forceRefresh 与 Off-Peak 同义，清掉快照后重拉（灰度翻转最长 1h 不可见）；
    *   3. 请求失败 fail-closed：返回 default（disabled）并 warn，绝不把异常抛给调用方——
@@ -247,7 +247,7 @@ export class BigModelCodingPlanSubscriptionProvider {
     forceRefresh?: boolean;
   }): Promise<DynamicWorkflowClientConfig> {
     // 覆盖合法即短路：判据（normalize）与快照构造（resolve）都留在 shared，这里不复述取值域。
-    if (normalizeDynamicWorkflowMode(process.env[ZCODE_DYNAMIC_WORKFLOW_MODE_ENV])) {
+    if (normalizeDynamicWorkflowMode(process.env[WBRAND_DYNAMIC_WORKFLOW_MODE_ENV])) {
       return resolveDynamicWorkflowClientConfig({ remote: undefined, env: process.env });
     }
     if (options?.forceRefresh) {
@@ -268,9 +268,9 @@ export class BigModelCodingPlanSubscriptionProvider {
     }
   }
 
-  async getModelContextBudgetStrategy(): Promise<ZCodeModelContextBudgetStrategy> {
+  async getModelContextBudgetStrategy(): Promise<WBrandModelContextBudgetStrategy> {
     // 3.12.2：预算统一为 preflight-v1；保留兼容方法，但不能再为每次建会话等待远端配置。
-    return DEFAULT_ZCODE_MODEL_CONTEXT_BUDGET_STRATEGY;
+    return DEFAULT_WBRAND_MODEL_CONTEXT_BUDGET_STRATEGY;
   }
 
   async getForceUpdateConfig(): Promise<ForceUpdateConfig | null> {
@@ -288,8 +288,8 @@ export class BigModelCodingPlanSubscriptionProvider {
         imRef: request.imRef ?? null,
         ticket: request.ticket ?? null,
         randstr: request.randstr ?? null,
-        // Coding Plan 试算接口默认按 Maas 渠道处理，不显式标记会丢失 zcode 来源归因。
-        salesChannel: request.salesChannel ?? "zcode",
+        // Coding Plan 试算接口默认按 Maas 渠道处理，不显式标记会丢失 wbrand 来源归因。
+        salesChannel: request.salesChannel ?? "wbrand",
       },
     );
   }
@@ -596,7 +596,7 @@ export class BigModelCodingPlanSubscriptionProvider {
     return unwrapEnvelope(payload, endpoint.providerId);
   }
 
-  private async getClientConfigs(): Promise<ZCodeClientConfigEnvelope> {
+  private async getClientConfigs(): Promise<WBrandClientConfigEnvelope> {
     if (this.clientConfigSnapshot && this.clientConfigSnapshotExpiresAt > Date.now()) {
       return this.clientConfigSnapshot;
     }
@@ -604,14 +604,14 @@ export class BigModelCodingPlanSubscriptionProvider {
       return await this.clientConfigRequest;
     }
 
-    // client/configs 和其他 ZCode 平台接口必须共享运行时 endpoint；
-    // E2E/测试环境会通过 ZCODE_BASE_URL 指向本地 mock，硬编码线上域名会让套餐状态不可控。
+    // client/configs 和其他 WBrand 平台接口必须共享运行时 endpoint；
+    // E2E/测试环境会通过 WBRAND_BASE_URL 指向本地 mock，硬编码线上域名会让套餐状态不可控。
     const url = resolveCodingPlanClientConfigUrl(process.env);
-    url.searchParams.set("app_version", ZCODE_VERSION);
+    url.searchParams.set("app_version", WBRAND_VERSION);
     url.searchParams.set("platform", resolveClientPlatformKey());
     // StartPlanCard 和套餐列表都来自同一个 client/configs。
     // 同屏分别读取 preview/products 时必须合并请求，避免未登录设置页重复打远端配置。
-    this.clientConfigRequest = readCodingPlanApiJson<ZCodeClientConfigEnvelope>(
+    this.clientConfigRequest = readCodingPlanApiJson<WBrandClientConfigEnvelope>(
       this.apiClient,
       url,
       {
@@ -658,12 +658,12 @@ export class BigModelCodingPlanSubscriptionProvider {
     if (!token) {
       throw new Error("bigmodel_oauth_required");
     }
-    const zcodeJwtToken = (await this.credentialService.load(ZCODE_JWT_TOKEN_KEY))?.trim();
-    if (zcodeJwtToken && token === zcodeJwtToken) {
-      // 旧版 BigModel OAuth callback 曾把 zcode JWT 同时写进
+    const wbrandJwtToken = (await this.credentialService.load(WBRAND_JWT_TOKEN_KEY))?.trim();
+    if (wbrandJwtToken && token === wbrandJwtToken) {
+      // 旧版 BigModel OAuth callback 曾把 wbrand JWT 同时写进
       // oauth:bigmodel:access_token，付费套餐预览会拿它去打 bigmodel.cn 并报令牌过期。
       // 这里在服务边界拦截旧污染状态，避免继续向 BigModel 业务接口发送错误凭据。
-      log.warn(undefined, "BigModel access token is stale zcode JWT; login required");
+      log.warn(undefined, "BigModel access token is stale wbrand JWT; login required");
       throw new Error("bigmodel_oauth_required");
     }
     return token;
@@ -783,7 +783,7 @@ export class BigModelCodingPlanSubscriptionProvider {
           createTeamPlanProjectApiKeyPrewarmStatusFromEnsureResult(result),
         );
       } catch (error) {
-        // 多团队套餐每个项目都需要独立 zcode-team-api-key。
+        // 多团队套餐每个项目都需要独立 wbrand-team-api-key。
         // 单个团队项目创建失败不能阻断 pricing 返回，否则会让其他团队入口一起不可见。
         log.warn(undefined, "Team Plan project api key prewarm failed", {
           family: this.codingPlanProviderId(),
@@ -814,7 +814,7 @@ export class BigModelCodingPlanSubscriptionProvider {
 }
 
 function resolveCodingPlanClientConfigUrl(env: NodeJS.ProcessEnv): URL {
-  return new URL(buildRuntimeZCodeApiUrl(env, ZCODE_CLIENT_CONFIG_API_PREFIX));
+  return new URL(buildRuntimeWBrandApiUrl(env, WBRAND_CLIENT_CONFIG_API_PREFIX));
 }
 
 function resolveFallbackEnterpriseTeamPlanProduct(
@@ -1046,7 +1046,7 @@ export function createBigModelLoginAuthHeaders(token: string): Record<string, st
 
 export function createZaiLoginAuthHeaders(token: string): Record<string, string> {
   return {
-    // Z.ai provider connection 已把 access_token 持久化为业务 JWT。
+    // Unew.cc provider connection 已把 access_token 持久化为业务 JWT。
     // 这里不能使用模型 API key，也不能给业务 JWT 添加 Bearer 前缀。
     Authorization: token,
     "Content-Type": "application/json",
@@ -1060,8 +1060,8 @@ function resolveCodingPlanHost(providerId: CodingPlanSubscriptionProviderId | un
 }
 
 function resolveZaiCodingPlanHost(): string {
-  // Z.ai Coding Plan 的 /api/biz 与 /api/pay 业务接口必须跟随产品环境。
-  // 业务 token 必须发送到 .env 配置的 ZAI Business origin；未覆盖时默认 api.z.ai。
+  // Unew.cc Coding Plan 的 /api/biz 与 /api/pay 业务接口必须跟随产品环境。
+  // 业务 token 必须发送到 .env 配置的 ZAI Business origin；未覆盖时默认 api.unew.cc。
   return resolveZaiBusinessBaseUrl(process.env);
 }
 
@@ -1116,27 +1116,27 @@ function normalizeStaticProductProviderIds<T>(
 }
 
 function unwrapClientConfigProducts(
-  payload: ZCodeClientConfigEnvelope,
+  payload: WBrandClientConfigEnvelope,
 ): CodingPlanStaticProductsConfig {
   if (payload.code !== undefined && payload.code !== 0) {
-    throw new Error(payload.msg?.trim() || "ZCode client config request failed");
+    throw new Error(payload.msg?.trim() || "WBrand client config request failed");
   }
   const products = payload.data?.configs?.codingPlanStaticProducts;
   if (!products || typeof products !== "object") {
-    throw new Error("ZCode client config missing Coding Plan products");
+    throw new Error("WBrand client config missing Coding Plan products");
   }
   return normalizeStaticProductProviderIds(products);
 }
 
 function unwrapClientConfigTeamProducts(
-  payload: ZCodeClientConfigEnvelope,
+  payload: WBrandClientConfigEnvelope,
 ): CodingPlanStaticTeamProductsConfig {
   if (payload.code !== undefined && payload.code !== 0) {
-    throw new Error(payload.msg?.trim() || "ZCode client config request failed");
+    throw new Error(payload.msg?.trim() || "WBrand client config request failed");
   }
   const products: unknown = payload.data?.configs?.codingPlanStaticTeamProducts;
   if (!products || typeof products !== "object") {
-    throw new Error("ZCode client config missing Coding Plan team products");
+    throw new Error("WBrand client config missing Coding Plan team products");
   }
   for (const providerProducts of Object.values(products)) {
     if (
@@ -1145,7 +1145,7 @@ function unwrapClientConfigTeamProducts(
     ) {
       // 远端配置没有运行时类型保障；无效静态目录必须整体降级为读取失败，
       // 让 UI 继续使用实时 pricing 恢复团队订阅身份，不能在合并阶段抛错。
-      throw new Error("ZCode client config has invalid Coding Plan team products");
+      throw new Error("WBrand client config has invalid Coding Plan team products");
     }
   }
   return normalizeStaticProductProviderIds(products as CodingPlanStaticTeamProductsConfig);
@@ -1193,10 +1193,10 @@ function isValidCardCopyConfigItem(value: unknown): boolean {
 }
 
 function unwrapClientConfigStartPlanPreview(
-  payload: ZCodeClientConfigEnvelope,
+  payload: WBrandClientConfigEnvelope,
 ): StartPlanPreviewConfig | null {
   if (payload.code !== undefined && payload.code !== 0) {
-    throw new Error(payload.msg?.trim() || "ZCode client config request failed");
+    throw new Error(payload.msg?.trim() || "WBrand client config request failed");
   }
   const preview = payload.data?.configs?.startPlanPreview;
   if (!preview) {
@@ -1207,7 +1207,7 @@ function unwrapClientConfigStartPlanPreview(
     typeof preview.name !== "string" ||
     !Array.isArray(preview.entitlements)
   ) {
-    throw new Error("ZCode client config invalid Start Plan preview");
+    throw new Error("WBrand client config invalid Start Plan preview");
   }
   return {
     planId: preview.planId,
@@ -1217,10 +1217,10 @@ function unwrapClientConfigStartPlanPreview(
 }
 
 function unwrapClientConfigForceUpdate(
-  payload: ZCodeClientConfigEnvelope,
+  payload: WBrandClientConfigEnvelope,
 ): ForceUpdateConfig | null {
   if (payload.code !== undefined && payload.code !== 0) {
-    throw new Error(payload.msg?.trim() || "ZCode client config request failed");
+    throw new Error(payload.msg?.trim() || "WBrand client config request failed");
   }
 
   const forceUpdate = payload.data?.configs?.forceUpdate;
@@ -1313,7 +1313,7 @@ function isUnrenderableRemoteErrorMessage(message: string): boolean {
 }
 
 function resolveCodingPlanProviderName(providerId: CodingPlanSubscriptionProviderId): string {
-  return isZaiCodingPlanProviderId(providerId) ? "Z.ai" : "BigModel";
+  return isZaiCodingPlanProviderId(providerId) ? "Unew.cc" : "BigModel";
 }
 
 function dropUndefined(value: Record<string, unknown>): Record<string, unknown> {
@@ -1322,21 +1322,21 @@ function dropUndefined(value: Record<string, unknown>): Record<string, unknown> 
 
 /**
  * 闲时任务灰度判据（纯函数供单测）：远端只提供曝光开关，模型成员和事实
- * 来自 ZCode Built-in Provider / Model Config。
- * mock 模式（ZCODE_OFFPEAK_MOCK=1）只替代产品曝光与套餐状态；模型候选仍来自 Registry。
+ * 来自 WBrand Built-in Provider / Model Config。
+ * mock 模式（WBRAND_OFFPEAK_MOCK=1）只替代产品曝光与套餐状态；模型候选仍来自 Registry。
  */
 export function resolveOffPeakClientConfig(
-  payload: ZCodeClientConfigEnvelope,
+  payload: WBrandClientConfigEnvelope,
   env: NodeJS.ProcessEnv,
   modelSelectionView: ModelSelectionView = EMPTY_OFF_PEAK_MODEL_SELECTION_VIEW,
 ): OffPeakClientConfig {
   const hasModels = modelSelectionView.providers.some((provider) => provider.models.length > 0);
-  if (env["ZCODE_OFFPEAK_MOCK"] === "1") {
+  if (env["WBRAND_OFFPEAK_MOCK"] === "1") {
     return {
       enabled: hasModels,
       modelSelectionView,
-      // ZCODE_OFFPEAK_MOCK_NO_PLAN=1 演示「非 coding plan 锁定」态；缺省视为已订阅。
-      codingPlanActive: env["ZCODE_OFFPEAK_MOCK_NO_PLAN"] !== "1",
+      // WBRAND_OFFPEAK_MOCK_NO_PLAN=1 演示「非 coding plan 锁定」态；缺省视为已订阅。
+      codingPlanActive: env["WBRAND_OFFPEAK_MOCK_NO_PLAN"] !== "1",
     };
   }
   const raw = payload.data?.configs?.offPeak;

@@ -6,9 +6,9 @@ import type {
   CodingPlanUsageSnapshot,
   UsageStatsRange,
   UsageStatsSnapshot,
-  ZCodeAccountAccess,
-  ZCodeProviderAccountAccess,
-} from "@zcode/shared";
+  WBrandAccountAccess,
+  WBrandProviderAccountAccess,
+} from "@wbrand/shared";
 import { logger } from "@/logger.js";
 import { useServices } from "@/hooks/useServices.js";
 import { useStableAccountAccess } from "@/hooks/useStableAccountAccess.js";
@@ -75,7 +75,7 @@ export function useUsageStats(
     dataSource?: "local" | "monitor";
     enabled?: boolean;
     preferredProviderId?: string;
-    accountAccess?: ZCodeProviderAccountAccess | ZCodeAccountAccess;
+    accountAccess?: WBrandProviderAccountAccess | WBrandAccountAccess;
     requirePreferredProvider?: boolean;
     allowEnvApiKey?: boolean;
   } = {},
@@ -245,7 +245,7 @@ export function useCodingPlanUsageStats(
   options: {
     enabled?: boolean;
     preferredProviderId?: string;
-    accountAccess?: ZCodeProviderAccountAccess | ZCodeAccountAccess;
+    accountAccess?: WBrandProviderAccountAccess | WBrandAccountAccess;
     customStartDate?: string | null;
     customEndDate?: string | null;
   },
@@ -331,7 +331,7 @@ export function useCodingPlanUsageStats(
         });
       }
       setState((current) => ({
-        // 切换 Z.AI/BigModel 时不能保留上一家 Coding Plan 的 monitor 快照；
+        // 切换 UNEW.CC/BigModel 时不能保留上一家 Coding Plan 的 monitor 快照；
         // 但同一 provider 切换 today/7d/30d 时保留旧快照，避免 Quota Remaining 和趋势区域闪空。
         snapshot: keepPreviousSnapshot ? current.snapshot : null,
         loading: true,

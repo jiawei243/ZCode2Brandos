@@ -4,7 +4,7 @@ import {
   createFailClosedAccountProviderConfigSnapshot,
   type AccountProviderConfigSnapshot,
   type ProviderSource,
-} from "@zcode/provider";
+} from "@wbrand/provider";
 import {
   NodeProviderConfigRuntime,
   type NodeProviderConfigRuntimeOptions,
@@ -43,7 +43,7 @@ export class NodeProviderRegistryRuntime {
     await this.#configRuntime.start();
     if (this.#accountSource instanceof MutableAccountProviderConfigSource) {
       const account = await this.#accountSource.read();
-      if (account.basedOnZCodeBuiltinRevision === "uninitialized") {
+      if (account.basedOnWBrandBuiltinRevision === "uninitialized") {
         this.#accountSource.replace(
           createFailClosedAccountProviderConfigSnapshot(await this.configService.read()),
           "initial-fail-closed",
@@ -57,8 +57,8 @@ export class NodeProviderRegistryRuntime {
     return this.#configRuntime.personalRepository;
   }
 
-  onDidCheckZCodeBuiltin(listener: () => Promise<void>): () => void {
-    return this.#configRuntime.onDidCheckZCodeBuiltin(listener);
+  onDidCheckWBrandBuiltin(listener: () => Promise<void>): () => void {
+    return this.#configRuntime.onDidCheckWBrandBuiltin(listener);
   }
 
   dispose(): void {

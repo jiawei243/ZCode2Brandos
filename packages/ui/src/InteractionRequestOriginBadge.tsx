@@ -1,16 +1,16 @@
-import type { ZCodeInteractionRequestOrigin } from "@zcode/shared";
+import type { WBrandInteractionRequestOrigin } from "@wbrand/shared";
 import { cn } from "@/components/lib/utils.js";
 import { Badge } from "@/components/ui/badge.js";
-import { useZCodeIntl } from "@/i18n/IntlProvider.js";
+import { useWBrandIntl } from "@/i18n/IntlProvider.js";
 
 export function InteractionRequestOriginBadge({
   className,
   origin,
 }: {
   className?: string;
-  origin?: ZCodeInteractionRequestOrigin;
+  origin?: WBrandInteractionRequestOrigin;
 }) {
-  const { intl } = useZCodeIntl();
+  const { intl } = useWBrandIntl();
   if (origin?.kind !== "subagent") {
     return null;
   }

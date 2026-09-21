@@ -1,4 +1,4 @@
-import type { ZCodeTaskMeta } from "@zcode/shared";
+import type { WBrandTaskMeta } from "@wbrand/shared";
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -28,7 +28,7 @@ export function GroupedTaskContextMenuContent({
   onOpenTaskFeedback,
   disabledReason,
 }: {
-  task: ZCodeTaskMeta;
+  task: WBrandTaskMeta;
   currentGroupId?: string;
   groups: TaskGroupMenuItem[];
   intl: {
@@ -37,11 +37,11 @@ export function GroupedTaskContextMenuContent({
   fileManagerLabel: string;
   taskSessionFile: { loading: boolean; path: string | null };
   taskNativeSessionLogFile: { loading: boolean; path: string | null };
-  onMoveTaskToGroup: (task: ZCodeTaskMeta, groupId: string | null) => void;
-  onMoveTaskToTop: (task: ZCodeTaskMeta) => void;
-  onStartRenameTask: (task: ZCodeTaskMeta) => void;
-  onArchiveTask: (task: ZCodeTaskMeta) => void;
-  onMarkTaskAsUnread: (task: ZCodeTaskMeta) => void;
+  onMoveTaskToGroup: (task: WBrandTaskMeta, groupId: string | null) => void;
+  onMoveTaskToTop: (task: WBrandTaskMeta) => void;
+  onStartRenameTask: (task: WBrandTaskMeta) => void;
+  onArchiveTask: (task: WBrandTaskMeta) => void;
+  onMarkTaskAsUnread: (task: WBrandTaskMeta) => void;
   onOpenTaskPathInFileManager: () => void;
   onCopyText: (label: string, text: string | null) => void;
   onOpenTaskFeedback: () => void;

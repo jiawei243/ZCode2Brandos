@@ -1,18 +1,18 @@
 import type {
-  ZCodeTaskListKind,
-  ZCodeTaskListSortBy,
-  ZCodeTaskListWorkspaceScope,
-} from "@zcode/services";
-import type { ZCodeTaskMeta } from "@zcode/shared";
-import { resolveWorkspaceStateKey } from "@/store/zcodeSessionStoreSelectors.js";
+  WBrandTaskListKind,
+  WBrandTaskListSortBy,
+  WBrandTaskListWorkspaceScope,
+} from "@wbrand/services";
+import type { WBrandTaskMeta } from "@wbrand/shared";
+import { resolveWorkspaceStateKey } from "@/store/wbrandSessionStoreSelectors.js";
 
 export type TaskEntityKey = string;
 export type TaskListCacheKey = string;
-export type TaskListQueryKind = ZCodeTaskListKind | "workspace";
+export type TaskListQueryKind = WBrandTaskListKind | "workspace";
 
 export interface TaskListCacheDescriptor {
   kind: TaskListQueryKind;
-  sortBy: ZCodeTaskListSortBy;
+  sortBy: WBrandTaskListSortBy;
   search: string;
   expanded: boolean;
   visibleLimit: number | null;
@@ -42,15 +42,15 @@ export function buildTaskWorkspaceKey(workspacePath: string, workspaceIdentity?:
 }
 
 export function buildTaskEntityKey(
-  task: Pick<ZCodeTaskMeta, "taskId" | "workspacePath" | "workspaceIdentity">,
+  task: Pick<WBrandTaskMeta, "taskId" | "workspacePath" | "workspaceIdentity">,
 ): TaskEntityKey {
   return `${buildTaskWorkspaceKey(task.workspacePath, task.workspaceIdentity)}::${task.taskId}`;
 }
 
 function normalizeTaskListWorkspaceScopes(
-  scopes: ZCodeTaskListWorkspaceScope[],
-): ZCodeTaskListWorkspaceScope[] {
-  const uniqueScopes = new Map<string, ZCodeTaskListWorkspaceScope>();
+  scopes: WBrandTaskListWorkspaceScope[],
+): WBrandTaskListWorkspaceScope[] {
+  const uniqueScopes = new Map<string, WBrandTaskListWorkspaceScope>();
 
   for (const scope of scopes) {
     const workspaceKey = buildTaskWorkspaceKey(scope.workspacePath, scope.workspaceIdentity);
@@ -71,8 +71,8 @@ function normalizeTaskListSearch(search?: string): string {
 
 export function buildTaskListCacheDescriptor(params: {
   kind: TaskListQueryKind;
-  workspaceScopes: ZCodeTaskListWorkspaceScope[];
-  sortBy: ZCodeTaskListSortBy;
+  workspaceScopes: WBrandTaskListWorkspaceScope[];
+  sortBy: WBrandTaskListSortBy;
   search?: string;
   expanded: boolean;
   visibleLimit?: number | null;

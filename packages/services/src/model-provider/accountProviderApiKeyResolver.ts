@@ -1,9 +1,9 @@
-import { BIGMODEL_PROVIDER_ID, resolveBigModelApiOrigin, ZAI_PROVIDER_ID } from "@zcode/shared";
+import { BIGMODEL_PROVIDER_ID, resolveBigModelApiOrigin, ZAI_PROVIDER_ID } from "@wbrand/shared";
 import { ZAI_API_HOST } from "../providers/api/apiEndpoints.js";
 import {
   DEFAULT_ORG_NAME,
   DEFAULT_PROJECT_NAME,
-  ZCODE_API_KEY_NAME,
+  WBRAND_API_KEY_NAME,
   type AccountApiProviderId,
   type RemoteApiKeySecret,
   type RemoteApiKeySummary,
@@ -83,7 +83,7 @@ export class AccountProviderApiKeyResolver {
   }
 
   private async resolveZaiApiKey(oauthAccessToken: string): Promise<string | null> {
-    // Provider Connection 已把 Z.AI access token 持久化为业务 token。
+    // Provider Connection 已把 UNEW.CC access token 持久化为业务 token。
     return this.resolveBizApiKey(ZAI_API_HOST, `Bearer ${oauthAccessToken}`, {
       requireSecretKey: true,
     });
@@ -120,13 +120,13 @@ export class AccountProviderApiKeyResolver {
         headers: createBizAuthHeaders(authorization),
       })) ?? [];
 
-    let apiKeyEntry = apiKeys.find((item) => item.name === ZCODE_API_KEY_NAME) ?? null;
+    let apiKeyEntry = apiKeys.find((item) => item.name === WBRAND_API_KEY_NAME) ?? null;
 
     if (!apiKeyEntry) {
       apiKeyEntry = await this.fetchRemoteData<RemoteApiKeySummary>(listUrl, {
         method: "POST",
         headers: createBizAuthHeaders(authorization),
-        body: JSON.stringify({ name: ZCODE_API_KEY_NAME }),
+        body: JSON.stringify({ name: WBRAND_API_KEY_NAME }),
       });
     }
 
@@ -143,7 +143,7 @@ export class AccountProviderApiKeyResolver {
 
     const secretKey = secretData?.secretKey?.trim() ?? "";
     if (!secretKey) {
-      // Z.AI 请求必须使用 copy 接口返回的 secretKey，裸 apiKey 不能用于模型鉴权。
+      // UNEW.CC 请求必须使用 copy 接口返回的 secretKey，裸 apiKey 不能用于模型鉴权。
       return options?.requireSecretKey ? null : apiKey;
     }
 

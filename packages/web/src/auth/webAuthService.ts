@@ -1,4 +1,4 @@
-import { ZAI_PROVIDER_ID, type UserInfo } from "@zcode/shared";
+import { ZAI_PROVIDER_ID, type UserInfo } from "@wbrand/shared";
 import {
   BrowserOAuthCredentialRepo,
   type WebOAuthProviderId,
@@ -176,8 +176,8 @@ export class WebAuthService {
     return this.repo.loadCachedSessionState();
   }
 
-  getZCodeJwtToken(): string | null {
-    return this.repo.loadZCodeJwtToken();
+  getWBrandJwtToken(): string | null {
+    return this.repo.loadWBrandJwtToken();
   }
 
   async logout(): Promise<void> {

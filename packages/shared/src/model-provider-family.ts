@@ -1,7 +1,7 @@
 import { BIGMODEL_PROVIDER_ID, type OAuthProviderId, ZAI_PROVIDER_ID } from "./oauth.js";
 import { BUILTIN_MODEL_PROVIDER_IDS, type BuiltinModelProviderId } from "./model-provider-types.js";
-import { ZCODE_ENV } from "./env.js";
-import { buildBigModelCodingPlanTeamManageUrl } from "./zcodeEndpoint.js";
+import { WBRAND_ENV } from "./env.js";
+import { buildBigModelCodingPlanTeamManageUrl } from "./wbrandEndpoint.js";
 
 export type ModelProviderFamilyId = "zai" | "bigmodel";
 export type ProviderFamilyDomain = ModelProviderFamilyId;
@@ -26,13 +26,13 @@ export interface ModelProviderFamilySpec {
 export const MODEL_PROVIDER_FAMILY_SPECS = [
   {
     id: "zai",
-    label: "Z.ai",
-    rootDomain: "z.ai",
+    label: "Unew.cc",
+    rootDomain: "unew.cc",
     oauthProviderId: ZAI_PROVIDER_ID,
     startPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiStartPlan,
     individualCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan,
     teamCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.zaiTeamCodingPlan,
-    teamCodingPlanManageUrl: "https://z.ai/manage-apikey/subscription",
+    teamCodingPlanManageUrl: "https://unew.cc/manage-apikey/subscription",
   },
   {
     id: "bigmodel",
@@ -42,7 +42,7 @@ export const MODEL_PROVIDER_FAMILY_SPECS = [
     startPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.bigmodelStartPlan,
     individualCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.bigmodelIndividualCodingPlan,
     teamCodingPlanProviderId: BUILTIN_MODEL_PROVIDER_IDS.bigmodelTeamCodingPlan,
-    teamCodingPlanManageUrl: buildBigModelCodingPlanTeamManageUrl({ ZCODE_ENV }),
+    teamCodingPlanManageUrl: buildBigModelCodingPlanTeamManageUrl({ WBRAND_ENV }),
   },
 ] as const satisfies readonly ModelProviderFamilySpec[];
 

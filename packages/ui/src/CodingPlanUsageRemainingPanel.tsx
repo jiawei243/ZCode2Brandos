@@ -1,19 +1,19 @@
 /* eslint-disable max-lines -- Coding Plan 用量视图集中维护来源选择、额度投影和重置入口；本阶段只迁移 Account Access，不拆分既有 UI 结构。 */
 import type {
   UsageEntitlementSnapshot,
-  ZCodeAccountAccess,
-  ZCodeProviderAccountAccess,
-} from "@zcode/shared";
+  WBrandAccountAccess,
+  WBrandProviderAccountAccess,
+} from "@wbrand/shared";
 import {
   BIGMODEL_PROVIDER_ID,
   BUILTIN_MODEL_PROVIDER_IDS,
   type OAuthProviderId,
   ZAI_PROVIDER_ID,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 import { ChevronRightIcon, Loader2 } from "lucide-react";
 import { useMemo } from "react";
 import { Button } from "@/components/ui/button.js";
-import { useZCodeIntl } from "@/i18n/IntlProvider.js";
+import { useWBrandIntl } from "@/i18n/IntlProvider.js";
 import {
   findCodingPlanQuotaLimit,
   formatQuotaRemainingPercentage,
@@ -29,7 +29,7 @@ import type {
 export interface CodingPlanUsageRemainingEntitlement {
   sourceId?: SidebarUsageCodingPlanSourceId;
   providerId: SidebarUsageCodingPlanProviderId;
-  accountAccess: ZCodeProviderAccountAccess | ZCodeAccountAccess;
+  accountAccess: WBrandProviderAccountAccess | WBrandAccountAccess;
   label?: string;
   snapshot: UsageEntitlementSnapshot | null;
   loading: boolean;
@@ -38,7 +38,7 @@ export interface CodingPlanUsageRemainingEntitlement {
 
 export interface CodingPlanUsageAvailableProvider {
   providerId: SidebarUsageCodingPlanProviderId;
-  accountAccess: ZCodeProviderAccountAccess | ZCodeAccountAccess;
+  accountAccess: WBrandProviderAccountAccess | WBrandAccountAccess;
   label: string;
 }
 
@@ -111,7 +111,7 @@ function resolveCodingPlanTabProviderIcon(providerId: string): OAuthProviderId {
 
 function formatCodingPlanProviderTabAriaLabel(providerId: string): string {
   return providerId === BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan
-    ? "Z.ai Coding Plan"
+    ? "Unew.cc Coding Plan"
     : "BigModel Coding Plan";
 }
 
@@ -229,7 +229,7 @@ export function CodingPlanUsageRemainingPanel({
   onUsageClick?: () => void;
   selectedProviderId?: SidebarUsageCodingPlanSourceId;
 }) {
-  const { intl, locale } = useZCodeIntl();
+  const { intl, locale } = useWBrandIntl();
   const state = useMemo(
     () =>
       resolveCodingPlanUsageRemainingState({

@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import type { UniqueIdentifier } from "@dnd-kit/core";
-import type { ZCodeTaskMeta } from "@zcode/shared";
+import type { WBrandTaskMeta } from "@wbrand/shared";
 import { MessageCirclePlus } from "lucide-react";
 import { cn } from "@/components/lib/utils.js";
-import { useZCodeIntl } from "@/i18n/IntlProvider.js";
+import { useWBrandIntl } from "@/i18n/IntlProvider.js";
 import { GroupedTaskRow } from "@/workspace-grouped-tasks/task-row.js";
 import type { TaskGroupMenuItem } from "@/workspace-grouped-tasks/shared.js";
 
@@ -15,7 +15,7 @@ export function EmptyGroupDropZone({
   groupId: string;
   onCreateTask: () => void;
 }) {
-  const { intl } = useZCodeIntl();
+  const { intl } = useWBrandIntl();
   const droppable = useDroppable({
     id: `group-empty-drop:${groupId}`,
     data: {
@@ -69,7 +69,7 @@ function GroupedTaskItemComponent({
   dragOverlay,
   tooltipsDisabled,
 }: {
-  task: ZCodeTaskMeta;
+  task: WBrandTaskMeta;
   groupId?: string;
   groups: TaskGroupMenuItem[];
   remoteSessionId?: string;
@@ -78,13 +78,13 @@ function GroupedTaskItemComponent({
   activeTaskId: string | null;
   workspaceLabel: string;
   onSelectTask: (workspacePath: string, taskId: string, workspaceIdentity?: string) => void;
-  onCloseTask: (task: ZCodeTaskMeta) => void;
-  onOpenFileTree?: (task: ZCodeTaskMeta) => void;
-  onMoveTaskToGroup: (task: ZCodeTaskMeta, groupId: string | null) => void;
-  onMoveTaskToTop: (task: ZCodeTaskMeta) => void;
-  onStartRenameTask: (task: ZCodeTaskMeta) => void;
-  onArchiveTask: (task: ZCodeTaskMeta) => void;
-  onMarkTaskAsUnread: (task: ZCodeTaskMeta) => void;
+  onCloseTask: (task: WBrandTaskMeta) => void;
+  onOpenFileTree?: (task: WBrandTaskMeta) => void;
+  onMoveTaskToGroup: (task: WBrandTaskMeta, groupId: string | null) => void;
+  onMoveTaskToTop: (task: WBrandTaskMeta) => void;
+  onStartRenameTask: (task: WBrandTaskMeta) => void;
+  onArchiveTask: (task: WBrandTaskMeta) => void;
+  onMarkTaskAsUnread: (task: WBrandTaskMeta) => void;
   dragId?: UniqueIdentifier;
   dragging?: boolean;
   dragOverlay?: boolean;

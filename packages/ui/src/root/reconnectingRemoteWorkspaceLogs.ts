@@ -1,4 +1,4 @@
-import type { RemoteWorkspaceSessionEntry } from "@zcode/shared";
+import type { RemoteWorkspaceSessionEntry } from "@wbrand/shared";
 
 interface ReconnectingRemoteWorkspaceEntry {
   workspaceKey?: string;

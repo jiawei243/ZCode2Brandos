@@ -14,7 +14,7 @@ export type {
   IntegratedTerminalShellSelection,
   Locale,
   LocalePreference,
-  ZCodeInteractionBehavior,
+  WBrandInteractionBehavior,
   TabId,
   TabState,
   ResourceUsageCategory,
@@ -28,9 +28,9 @@ export type {
 } from "./protocol.js";
 export type { WorkspacePurpose } from "./workspacePurpose.js";
 export { DEFAULT_LOCALE } from "./protocol.js";
-export { ZCODE_VERSION, ZCODE_COMMIT, ZCODE_BUILD_TIME } from "./version.js";
+export { WBRAND_VERSION, WBRAND_COMMIT, WBRAND_BUILD_TIME } from "./version.js";
 export type { HelloMessage, HelloAckMessage } from "./handshake.js";
-export type { ArmsRumEnv, ZCodeEnv, ZCodeProductFlavor } from "./env.js";
+export type { ArmsRumEnv, WBrandEnv, WBrandProductFlavor } from "./env.js";
 export type { RemoteAssetInstallMode } from "./remoteAssetInstallMode.js";
 export type {
   RemoteResourcePackageId,
@@ -60,17 +60,17 @@ export {
   serializeShortcutBinding,
 } from "./shortcutCommands.js";
 export {
-  ZCODE_ENV,
-  ZCODE_PRODUCT_FLAVOR,
-  ZCODE_APP_VERSION_ENV,
-  ZCODE_BUILD_COMMIT_ID_ENV,
-  RUNTIME_ZCODE_DEBUG,
-  ZCODE_TELEMETRY_REPORT_ENDPOINT,
-  ZCODE_ARMS_RUM_ENDPOINT,
-  ZCODE_TELEMETRY_ENABLED,
-  mapZCodeEnvToArmsRumEnv,
-  normalizeZCodeEnv,
-  normalizeZCodeProductFlavor,
+  WBRAND_ENV,
+  WBRAND_PRODUCT_FLAVOR,
+  WBRAND_APP_VERSION_ENV,
+  WBRAND_BUILD_COMMIT_ID_ENV,
+  RUNTIME_WBRAND_DEBUG,
+  WBRAND_TELEMETRY_REPORT_ENDPOINT,
+  WBRAND_ARMS_RUM_ENDPOINT,
+  WBRAND_TELEMETRY_ENABLED,
+  mapWBrandEnvToArmsRumEnv,
+  normalizeWBrandEnv,
+  normalizeWBrandProductFlavor,
 } from "./env.js";
 export * from "./errors.js";
 export type { SessionCreateSource } from "./sessionCreateSource.js";
@@ -78,31 +78,31 @@ export { resolveSafeEndpointHostname } from "./endpointHostname.js";
 export * from "./rendererActionTrace.js";
 export * from "./validation.js";
 export * from "./api.js";
-export * from "./zcode-protocol/index.js";
+export * from "./wbrand-protocol/index.js";
 export * from "./account-provider-state.js";
 // re-home：旧协议承重面的幸存文件（消费者继续走 barrel，零感知）
-export * from "./zcode-protocol-legacy-types.js";
-export * from "./zcode-task-types-core.js";
+export * from "./wbrand-protocol-legacy-types.js";
+export * from "./wbrand-task-types-core.js";
 export * from "./task-realtime-core.js";
 export * from "./remote-workspace-identity.js";
-export * from "./zcode-api-retry-status.js";
-export * from "./zcode-network-debug-status.js";
-export * from "./zcode-session-visible-content.js";
+export * from "./wbrand-api-retry-status.js";
+export * from "./wbrand-network-debug-status.js";
+export * from "./wbrand-session-visible-content.js";
 export * from "./official-mcp-auth.js";
 export * from "./official-mcp-tool-error.js";
 export * from "./conversation-message-projection-policy.js";
 export * from "./conversation-share.js";
 export * from "./conversation-preview-artifacts.js";
-export * from "./zcode-session-task-status.js";
-export * from "./zcode-tool-projection-memory.js";
-export * from "./zcode-slash-command-help.js";
-export * from "./zcodeEndpoint.js";
-export * from "./zcode-source-headers.js";
-export * from "./zcode-agent-policy.js";
-export * from "./zcode-media-policy.js";
+export * from "./wbrand-session-task-status.js";
+export * from "./wbrand-tool-projection-memory.js";
+export * from "./wbrand-slash-command-help.js";
+export * from "./wbrandEndpoint.js";
+export * from "./wbrand-source-headers.js";
+export * from "./wbrand-agent-policy.js";
+export * from "./wbrand-media-policy.js";
 export * from "./media-preview.js";
 export * from "./plugin-display-name.js";
-export * from "./zcode-agent-runtime.js";
+export * from "./wbrand-agent-runtime.js";
 export * from "./runtimeEnv.js";
 export * from "./dynamic-workflow-feature.js";
 export * from "./markdown-artifact-images.js";
@@ -219,7 +219,7 @@ export type {
   UpdateCheckResultPayload,
   UpdateStatePayload,
   WSLDistro,
-  ZCodeStdioTapDevState,
+  WBrandStdioTapDevState,
 } from "./platform.js";
 export type {
   CuaAccessibilitySettingsResult,
@@ -227,15 +227,15 @@ export type {
   OpenCuaPermissionOnboardingOptions,
   PrepareCuaHelperPermissionDragResult,
 } from "./cuaAccessibilitySettings.js";
-export type { ZCodeTaskCreateResult } from "./zcode-task-types.js";
-export * from "./zcode-task-types.js";
+export type { WBrandTaskCreateResult } from "./wbrand-task-types.js";
+export * from "./wbrand-task-types.js";
 export * from "./automation-types.js";
 export * from "./off-peak-types.js";
 export * from "./background-task-control-merge.js";
 export * from "./background-task-controls.js";
 export * from "./background-task-notifications.js";
 export * from "./background-bash-jobs.js";
-export * from "./zcode-agent-model-state.js";
+export * from "./wbrand-agent-model-state.js";
 export * from "./task-realtime.js";
 export { formatTimestamp, formatLogPrefix } from "./log-format.js";
 export * from "./model-provider-types.js";
@@ -266,7 +266,7 @@ export * from "./mcp.js";
 export * from "./runtime-tool-runtime.js";
 export * from "./git.js";
 export * from "./assistant-message-parts.js";
-export * from "./zcodePersistedMessageMerge.js";
+export * from "./wbrandPersistedMessageMerge.js";
 export * from "./assistant-presentation.js";
 export * from "./tool-call-summary.js";
 export * from "./tool-identity.js";

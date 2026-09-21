@@ -1,4 +1,4 @@
-import type { TelemetryRendererContext } from "@zcode/shared";
+import type { TelemetryRendererContext } from "@wbrand/shared";
 
 interface AppTelemetryBridge {
   syncTelemetryContext(context: TelemetryRendererContext): void;

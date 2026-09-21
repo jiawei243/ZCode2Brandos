@@ -3,7 +3,7 @@ import type {
   AssistantTextRow,
   ConversationRowTarget,
   V4ConversationFileChangesResult,
-} from "@zcode/shared/zcode-protocol-v4";
+} from "@wbrand/shared/wbrand-protocol-v4";
 import {
   buildAssistantPreviewCardsFromReferences,
   extractAssistantFileReferences,

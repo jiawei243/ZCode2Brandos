@@ -2,10 +2,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type {
   UsageEntitlementSnapshot,
-  ZCodeAccountAccess,
-  ZCodeProviderAccountAccess,
-} from "@zcode/shared";
-import type { IUsageStatsService } from "@zcode/services";
+  WBrandAccountAccess,
+  WBrandProviderAccountAccess,
+} from "@wbrand/shared";
+import type { IUsageStatsService } from "@wbrand/services";
 import { useOptionalBaseWorkspaceServices } from "@/hooks/useWorkspaceServices.js";
 import { useStableAccountAccess } from "@/hooks/useStableAccountAccess.js";
 import { logger } from "@/logger.js";
@@ -136,7 +136,7 @@ export interface UseUsageEntitlementOptions {
   enabled?: boolean;
   includeSubscription?: boolean;
   preferredProviderId?: string;
-  accountAccess?: ZCodeProviderAccountAccess | ZCodeAccountAccess;
+  accountAccess?: WBrandProviderAccountAccess | WBrandAccountAccess;
   allowDisabledPreferredProvider?: boolean;
   requirePreferredProvider?: boolean;
   allowEnvApiKey?: boolean;
@@ -358,7 +358,7 @@ export function useUsageEntitlementWithService(
             };
           }
           return {
-            // 切换 BigModel/Z.AI 后如果新 provider 查询失败，继续保留旧 snapshot 会让 banner/浮窗显示上一家供应商。
+            // 切换 BigModel/UNEW.CC 后如果新 provider 查询失败，继续保留旧 snapshot 会让 banner/浮窗显示上一家供应商。
             // 出错时清空快照，避免用过期品牌和额度误导用户。
             snapshot: null,
             loading: false,

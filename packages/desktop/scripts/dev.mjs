@@ -86,7 +86,8 @@ async function waitForReady() {
   // Wait for Vite dev server
   // Vite 在不同本机 DNS/IPv6 配置下可能只监听 localhost/::1 或 127.0.0.1 其中之一。
   // 这里轮询多个 loopback 地址，避免 dev 脚本和 Vite 实际监听地址不一致导致 Electron 永远不启动。
-  const viteUrls = ["http://localhost:5174", "http://127.0.0.1:5174", "http://[::1]:5174"];
+  // 临时：与 vite.config.ts 的 5274 保持一致（还原时改回 5174）。
+  const viteUrls = ["http://localhost:5274", "http://127.0.0.1:5274", "http://[::1]:5274"];
   let lastViteWaitLogAt = 0;
   while (true) {
     const failures = [];
@@ -114,19 +115,19 @@ let electronCommand = existsSync(electronBinary) ? electronBinary : "electron";
 
 if (process.platform === "darwin" && existsSync(electronBinary)) {
   // macOS 命令行启动的 raw Electron 没有 CFBundleURLTypes，LaunchServices 会把
-  // zcode:// 交给一个没有项目入口的 Electron 默认壳。给本地启动副本补齐产品
+  // wbrand:// 交给一个没有项目入口的 Electron 默认壳。给本地启动副本补齐产品
   // Info.plist 后，线上 Share 页面无需感知 Dev，仍可把链接投递给已运行的 Dev 实例。
   const electronPackageJsonPath = require.resolve("electron/package.json");
   const electronPackage = JSON.parse(await readFile(electronPackageJsonPath, "utf8"));
   const electronAppPath = resolve(electronBinary, "../../..");
   const devBundle = await prepareDevElectronAppBundle({
     electronAppPath,
-    runtimeRoot: resolve(root, "../../.zcode-runtime/desktop-dev"),
+    runtimeRoot: resolve(root, "../../.wbrand-runtime/desktop-dev"),
     electronVersion: electronPackage.version,
     arch: process.arch,
   });
   electronCommand = devBundle.executablePath;
-  console.log(`[dev] Prepared macOS ZCode Dev bundle: ${devBundle.appPath}`);
+  console.log(`[dev] Prepared macOS WBrand Dev bundle: ${devBundle.appPath}`);
 }
 
 const electron = spawn(electronCommand, ["."], {

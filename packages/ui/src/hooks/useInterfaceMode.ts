@@ -1,5 +1,5 @@
-import { useZCodeStoreWithDefault } from "@/store/StoreProvider.js";
+import { useWBrandStoreWithDefault } from "@/store/StoreProvider.js";
 
 export function useIsOfficeMode(): boolean {
-  return useZCodeStoreWithDefault((state) => state.interfaceMode === "office", false);
+  return useWBrandStoreWithDefault((state) => state.interfaceMode === "office", false);
 }

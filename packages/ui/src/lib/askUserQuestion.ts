@@ -1,4 +1,4 @@
-type ZCodeUserQuestionAnswers = Record<string, unknown>;
+type WBrandUserQuestionAnswers = Record<string, unknown>;
 
 type AskUserQuestionType = "single" | "multiple";
 
@@ -20,7 +20,7 @@ interface AskUserQuestionItem {
 
 interface AskUserQuestionData {
   questions: AskUserQuestionItem[];
-  answers?: ZCodeUserQuestionAnswers;
+  answers?: WBrandUserQuestionAnswers;
 }
 
 interface AskUserQuestionAnswerDraft {
@@ -104,11 +104,11 @@ function readQuestions(input: unknown): unknown[] {
   if (Array.isArray(questions)) {
     return questions;
   }
-  // ZCode Agent 的单题输入与交互请求的多题输入共用展示管线。
+  // WBrand Agent 的单题输入与交互请求的多题输入共用展示管线。
   return typeof input.question === "string" && Array.isArray(input.options) ? [input] : [];
 }
 
-function readAnswers(input: unknown): ZCodeUserQuestionAnswers | undefined {
+function readAnswers(input: unknown): WBrandUserQuestionAnswers | undefined {
   if (!isPlainRecord(input)) {
     return undefined;
   }
@@ -131,7 +131,7 @@ function parseJsonRecord(output: unknown): Record<string, unknown> | undefined {
   }
 }
 
-function readNestedAskUserQuestionAnswers(input: unknown): ZCodeUserQuestionAnswers | undefined {
+function readNestedAskUserQuestionAnswers(input: unknown): WBrandUserQuestionAnswers | undefined {
   const record = parseJsonRecord(input);
   if (!record) {
     return undefined;
@@ -164,10 +164,10 @@ function readNestedAskUserQuestionAnswers(input: unknown): ZCodeUserQuestionAnsw
   return readNestedAskUserQuestionAnswers(record.output);
 }
 
-function parseZCodeAskUserQuestionOutput(
+function parseWBrandAskUserQuestionOutput(
   output: unknown,
   input: unknown,
-): ZCodeUserQuestionAnswers | undefined {
+): WBrandUserQuestionAnswers | undefined {
   const outputRecord = parseJsonRecord(output);
   if (!outputRecord) {
     return undefined;
@@ -283,17 +283,17 @@ export function readAskUserQuestionAnswers(value: {
   input?: unknown;
   output?: unknown;
   raw?: unknown;
-}): ZCodeUserQuestionAnswers | undefined {
+}): WBrandUserQuestionAnswers | undefined {
   const nestedOutputAnswers = readNestedAskUserQuestionAnswers(value.output);
   if (nestedOutputAnswers) {
     return nestedOutputAnswers;
   }
-  const parsedZCodeOutputAnswers = parseZCodeAskUserQuestionOutput(
+  const parsedWBrandOutputAnswers = parseWBrandAskUserQuestionOutput(
     value.output,
     readAskUserQuestionInput(value),
   );
-  if (parsedZCodeOutputAnswers) {
-    return parsedZCodeOutputAnswers;
+  if (parsedWBrandOutputAnswers) {
+    return parsedWBrandOutputAnswers;
   }
   if (isPlainRecord(value.input) && isPlainRecord(value.input.answers)) {
     return value.input.answers;
@@ -303,23 +303,23 @@ export function readAskUserQuestionAnswers(value: {
     if (nestedRawOutputAnswers) {
       return nestedRawOutputAnswers;
     }
-    const parsedRawZCodeOutputAnswers = parseZCodeAskUserQuestionOutput(
+    const parsedRawWBrandOutputAnswers = parseWBrandAskUserQuestionOutput(
       value.raw.rawOutput,
       readAskUserQuestionInput(value),
     );
-    if (parsedRawZCodeOutputAnswers) {
-      return parsedRawZCodeOutputAnswers;
+    if (parsedRawWBrandOutputAnswers) {
+      return parsedRawWBrandOutputAnswers;
     }
     const nestedRawAnswers = readNestedAskUserQuestionAnswers(value.raw.output);
     if (nestedRawAnswers) {
       return nestedRawAnswers;
     }
-    const parsedRawZCodeAnswers = parseZCodeAskUserQuestionOutput(
+    const parsedRawWBrandAnswers = parseWBrandAskUserQuestionOutput(
       value.raw.output,
       readAskUserQuestionInput(value),
     );
-    if (parsedRawZCodeAnswers) {
-      return parsedRawZCodeAnswers;
+    if (parsedRawWBrandAnswers) {
+      return parsedRawWBrandAnswers;
     }
     const nestedRawContentAnswers = readNestedAskUserQuestionAnswers(value.raw.content);
     if (nestedRawContentAnswers) {
@@ -331,7 +331,7 @@ export function readAskUserQuestionAnswers(value: {
 
 export function getAskUserQuestionAnswerText(
   question: AskUserQuestionItem,
-  answers: ZCodeUserQuestionAnswers | undefined,
+  answers: WBrandUserQuestionAnswers | undefined,
   noAnswerText: string,
 ) {
   const value = answers?.[question.question] ?? answers?.[question.id];

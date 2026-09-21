@@ -1,7 +1,7 @@
-import type { ZCodeTaskChangeSummary } from "@zcode/shared";
+import type { WBrandTaskChangeSummary } from "@wbrand/shared";
 
 export function formatGroupedTaskHoverChangeParts(
-  summary: ZCodeTaskChangeSummary | null,
+  summary: WBrandTaskChangeSummary | null,
 ): string[] {
   if (!summary) {
     return [];

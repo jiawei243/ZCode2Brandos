@@ -1,5 +1,5 @@
 /* eslint-disable max-lines -- Playwright isolated-world selector、frame target 与 CDP trusted input 必须共享同一会话状态。 */
-import type { BrowserPlaywrightAction, BrowserPlaywrightModifier } from "@zcode/shared";
+import type { BrowserPlaywrightAction, BrowserPlaywrightModifier } from "@wbrand/shared";
 import { logger } from "../logger.js";
 import { dispatchClickAt, dispatchKey, modifiersBitmask } from "./browserCommandInput.js";
 import type { ControlledView } from "./browserCommandTypes.js";
@@ -13,8 +13,8 @@ import { getPlaywrightInjectedScriptSource } from "./playwrightInjectedScriptSou
 
 type LocatorAction = Extract<BrowserPlaywrightAction, { name: "locator" }>;
 
-const PLAYWRIGHT_WORLD_NAME = "zcode-playwright-locator";
-const PLAYWRIGHT_GLOBAL = "__zcodePlaywrightInjected";
+const PLAYWRIGHT_WORLD_NAME = "wbrand-playwright-locator";
+const PLAYWRIGHT_GLOBAL = "__wbrandPlaywrightInjected";
 const POLL_INTERVAL_MS = 50;
 // 响应式页面可能同时保留 desktop/mobile 两份 DOM。若仅因匹配数大于 1 就在 host
 // 侧抛通用错误，会错过唯一可见元素，也会丢失 Playwright 提供的候选详情。
@@ -312,7 +312,7 @@ class IabPlaywrightLocatorSession {
             needsEditable,
             needsEnabled,
             // fill/type 不等待 stable，也不做 click 的 hit-target 检查。
-            // z.ai 输入框的持续动画会让 stable 永不成立，等待 stable 会卡到 MCP hard timeout。
+            // unew.cc 输入框的持续动画会让 stable 永不成立，等待 stable 会卡到 MCP hard timeout。
             // force pointer action 仍等待稳定并滚动，但跳过 hit-target 校验。
             needsHitTarget: needsPointer && action.force !== true,
             needsStable: needsPointer,

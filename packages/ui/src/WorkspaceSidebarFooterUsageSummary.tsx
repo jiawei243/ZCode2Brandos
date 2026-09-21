@@ -7,7 +7,7 @@ import {
   normalizeProviderFamilyDomain,
   resolveModelProviderFamilyIdByProviderId,
   TID_SIDEBAR_CODING_PLAN_USAGE_BUTTON,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 import { BarChart3Icon, RocketIcon } from "lucide-react";
 import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu.js";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@/CodingPlanUsageRemainingPanel.js";
 import { useProviderSettingsView } from "@/hooks/useProviderSettingsView.js";
 import { useUsageEntitlement } from "@/hooks/useUsageEntitlement.js";
-import { useZCodeIntl } from "@/i18n/IntlProvider.js";
+import { useWBrandIntl } from "@/i18n/IntlProvider.js";
 import { useSettings } from "@/hooks/useSettingService.js";
 import {
   resolveEntitledAccountProviderAccess,
@@ -38,7 +38,7 @@ import {
   buildCodingPlanUsageSources,
   resolveSidebarCurrentCodingPlanUsageSource,
 } from "@/lib/codingPlanUsageSources.js";
-import { selectWorkspaceZCodeState, useZCodeSessionStore } from "@/store/zcodeSessionStore.js";
+import { selectWorkspaceWBrandState, useWBrandSessionStore } from "@/store/wbrandSessionStore.js";
 import { parseCustomProviderIdFromSupplierKey } from "@/lib/modelConfigSync.js";
 import { setPendingSettingsUsageIntent } from "@/lib/settingsNavigation.js";
 import {
@@ -99,9 +99,9 @@ export function useWorkspaceSidebarFooterUsageSummaryState({
     providerSettingsRead.state.status === "ready" ? providerSettingsRead.state.view : null;
   // 首次读取失败也不能被解释成“已经加载且没有套餐”；只有 Ready 才能消费 Provider 事实。
   const providerSourcesLoading = providerSettingsRead.state.status !== "ready";
-  const selectedSupplierKey = useZCodeSessionStore((state) =>
+  const selectedSupplierKey = useWBrandSessionStore((state) =>
     workspacePath
-      ? selectWorkspaceZCodeState(state, workspacePath, workspaceIdentity).selectedSupplierKey
+      ? selectWorkspaceWBrandState(state, workspacePath, workspaceIdentity).selectedSupplierKey
       : "",
   );
   const availableCodingPlanProviders = useMemo(
@@ -119,7 +119,7 @@ export function useWorkspaceSidebarFooterUsageSummaryState({
             label:
               access.label ||
               (providerId === BUILTIN_MODEL_PROVIDER_IDS.zaiIndividualCodingPlan
-                ? "Z.ai - Coding Plan"
+                ? "Unew.cc - Coding Plan"
                 : "BigModel - Coding Plan"),
           },
         ];
@@ -154,7 +154,7 @@ export function useWorkspaceSidebarFooterUsageSummaryState({
     ? resolveModelProviderFamilyIdByProviderId(selectedProviderIdFromSupplierKey)
     : null;
   // providerFamilyDomain 是当前登录/运行 family 边界；BigModel Team selectedKey
-  // 会在切换到 Z.ai 后保留，footer 若不按当前 domain 过滤会把头像旁徽标误显示成 Team。
+  // 会在切换到 Unew.cc 后保留，footer 若不按当前 domain 过滤会把头像旁徽标误显示成 Team。
   const scopedSelectedProviderId =
     selectedProviderFamilyId &&
     providerFamilyDomain &&
@@ -427,7 +427,7 @@ export function WorkspaceSidebarFooterUsageSummaryContent({
     funnelContext: CodingPlanFunnelContext,
   ) => void;
 }) {
-  const { intl } = useZCodeIntl();
+  const { intl } = useWBrandIntl();
   const entryGate = useCodingPlanEntryGate();
   const { providerEntitlements, upgradeTargetProviderId } = state;
   const upgradeProviderSnapshot =
@@ -486,7 +486,7 @@ export function WorkspaceSidebarFooterPlanBadge({
 }: {
   state: WorkspaceSidebarFooterUsageSummaryState;
 }) {
-  const { intl } = useZCodeIntl();
+  const { intl } = useWBrandIntl();
   const label =
     state.profilePlanBadge?.audience === "team"
       ? intl.formatMessage({ id: "sidebar.usage.plan.audienceTeam" })

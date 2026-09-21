@@ -1,10 +1,10 @@
-import type { IDisposable } from "@zcode/rpc";
-import type { IZCodeAgentService } from "@zcode/services";
-import type { ProcessResourceRuntimeSurface } from "@zcode/shared";
-import { HostResponseTypes } from "@zcode/shared";
+import type { IDisposable } from "@wbrand/rpc";
+import type { IWBrandAgentService } from "@wbrand/services";
+import type { ProcessResourceRuntimeSurface } from "@wbrand/shared";
+import { HostResponseTypes } from "@wbrand/shared";
 
 interface RegisterHostAgentResourceTelemetryOptions {
-  agentService: Pick<IZCodeAgentService, "onDynamicProcessResourceSample">;
+  agentService: Pick<IWBrandAgentService, "onDynamicProcessResourceSample">;
   postMessage(message: unknown): void;
   runtimeSurface: ProcessResourceRuntimeSurface;
   environmentKey?: string;

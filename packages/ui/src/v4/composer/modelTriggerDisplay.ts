@@ -1,7 +1,7 @@
 import {
   BUILTIN_MODEL_PROVIDER_IDS,
   resolveModelProviderFamilyIdByProviderId,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 import type { IntlInstance } from "@/i18n/IntlProvider.js";
 import type { ModelSelectGroup } from "@/ModelConfigSelect.js";
 
@@ -43,7 +43,7 @@ export function formatProviderModelLabel(
   providerName: string | undefined,
   modelName: string,
 ): string {
-  // Z.ai / BigModel 的内置连接名属于产品固定入口，拼进模型文案会重复展示
+  // Unew.cc / BigModel 的内置连接名属于产品固定入口，拼进模型文案会重复展示
   // “Coding Plan”等连接信息；切换提示额外通过 formatModelChangeLabel 标明套餐类型。
   if (providerId && resolveModelProviderFamilyIdByProviderId(providerId)) {
     return modelName;

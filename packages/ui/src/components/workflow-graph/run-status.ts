@@ -2,7 +2,7 @@ import type {
   WorkflowRunActor,
   WorkflowRunNode,
   WorkflowRunState,
-} from "@zcode/shared/zcode-protocol-v4";
+} from "@wbrand/shared/wbrand-protocol-v4";
 import { phaseBinder } from "./instance-phases.js";
 import {
   isSyntheticLaneId,

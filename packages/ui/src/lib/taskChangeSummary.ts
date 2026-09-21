@@ -1,10 +1,10 @@
 import type {
-  ZCodePersistedFileChange,
-  ZCodeTaskChangeSummary,
-  ZCodeTaskChangedFileSummary,
-  ZCodeTaskMeta,
-} from "@zcode/shared";
-import { computeLineChangeStat } from "@zcode/shared";
+  WBrandPersistedFileChange,
+  WBrandTaskChangeSummary,
+  WBrandTaskChangedFileSummary,
+  WBrandTaskMeta,
+} from "@wbrand/shared";
+import { computeLineChangeStat } from "@wbrand/shared";
 import { getPathLeaf } from "@/lib/path.js";
 
 interface TaskChangeSummaryIntl {
@@ -24,8 +24,8 @@ function trimTrailingSeparators(path: string): string {
 }
 
 export function getTaskChangeSummary(
-  task: Pick<ZCodeTaskMeta, "changeSummary"> | null | undefined,
-): ZCodeTaskChangeSummary | null {
+  task: Pick<WBrandTaskMeta, "changeSummary"> | null | undefined,
+): WBrandTaskChangeSummary | null {
   if (!task?.changeSummary || task.changeSummary.files.length === 0) {
     return null;
   }
@@ -34,7 +34,7 @@ export function getTaskChangeSummary(
 }
 
 function formatTaskChangeStats(
-  summary: ZCodeTaskChangeSummary,
+  summary: WBrandTaskChangeSummary,
   intl: TaskChangeSummaryIntl,
 ): string {
   return intl.formatMessage(
@@ -48,7 +48,7 @@ function formatTaskChangeStats(
 
 export function formatTaskTitleWithChanges(
   title: string,
-  summary: ZCodeTaskChangeSummary | null,
+  summary: WBrandTaskChangeSummary | null,
   intl: TaskChangeSummaryIntl,
 ): string {
   if (!summary) {
@@ -81,8 +81,8 @@ export function toWorkspaceRelativePath(workspacePath: string, filePath: string)
 }
 
 export function buildTaskChangeSummary(
-  fileChanges: readonly ZCodePersistedFileChange[] | undefined,
-): ZCodeTaskChangeSummary | null {
+  fileChanges: readonly WBrandPersistedFileChange[] | undefined,
+): WBrandTaskChangeSummary | null {
   if (!fileChanges || fileChanges.length === 0) {
     return null;
   }
@@ -115,7 +115,7 @@ export function buildTaskChangeSummary(
 
   let added = 0;
   let removed = 0;
-  const files: ZCodeTaskChangedFileSummary[] = Array.from(changedFileMap.values())
+  const files: WBrandTaskChangedFileSummary[] = Array.from(changedFileMap.values())
     .map((file) => {
       const fileStat = computeLineChangeStat(file.originalContent, file.finalContent);
       added += fileStat.added;
@@ -139,8 +139,8 @@ export function buildTaskChangeSummary(
 }
 
 export function buildTurnChangeSummary(
-  turn: ZCodePersistedFileChange | null | undefined,
-): ZCodeTaskChangeSummary | null {
+  turn: WBrandPersistedFileChange | null | undefined,
+): WBrandTaskChangeSummary | null {
   if (!turn || turn.snapshots.length === 0) {
     return null;
   }
@@ -174,7 +174,7 @@ export function buildTurnChangeSummary(
 
   let added = 0;
   let removed = 0;
-  const files: ZCodeTaskChangedFileSummary[] = Array.from(filesByPath.entries())
+  const files: WBrandTaskChangedFileSummary[] = Array.from(filesByPath.entries())
     .map(([path, snapshot]) => {
       const fileStat = computeLineChangeStat(snapshot.beforeContent, snapshot.afterContent);
       added += fileStat.added;
@@ -202,9 +202,9 @@ export function buildTurnChangeSummary(
  * 用于在每条 assistant 消息下方显示该轮的文件改动。
  */
 export function buildPerTurnChangeSummaries(
-  fileChanges: readonly ZCodePersistedFileChange[] | undefined,
-): Map<number, ZCodeTaskChangeSummary> {
-  const result = new Map<number, ZCodeTaskChangeSummary>();
+  fileChanges: readonly WBrandPersistedFileChange[] | undefined,
+): Map<number, WBrandTaskChangeSummary> {
+  const result = new Map<number, WBrandTaskChangeSummary>();
   if (!fileChanges || fileChanges.length === 0) {
     return result;
   }

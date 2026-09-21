@@ -1,6 +1,6 @@
-import { buildRuntimeZCodeApiUrl, resolveZaiBusinessBaseUrl } from "@zcode/shared";
+import { buildRuntimeWBrandApiUrl, resolveZaiBusinessBaseUrl } from "@wbrand/shared";
 
-export const ZCODE_CLIENT_SCENES_URL = buildRuntimeZCodeApiUrl(
+export const WBRAND_CLIENT_SCENES_URL = buildRuntimeWBrandApiUrl(
   process.env,
   "/api/v1/client/scenes",
 );

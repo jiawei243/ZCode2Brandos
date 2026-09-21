@@ -3,9 +3,9 @@ import {
   type AppSettings,
   type Locale,
   type ProviderFamilyDomain,
-} from "@zcode/shared";
-import type { ModelSelectionView } from "@zcode/services";
-import { encodeCustomModelValue } from "@/lib/zcodeCustomModelValue.js";
+} from "@wbrand/shared";
+import type { ModelSelectionView } from "@wbrand/services";
+import { encodeCustomModelValue } from "@/lib/wbrandCustomModelValue.js";
 
 export type ApiKeyProviderChoice = "zai" | "bigmodel";
 
@@ -23,7 +23,7 @@ export function resolveLoginApiKeyTemplateId(
 
 export function resolveLoginApiKeyProviderLabel(choice: ApiKeyProviderChoice): string {
   // Welcome Screen API Key 错误提示需要使用 BigModel 品牌固定写法。
-  return choice === "zai" ? "Z.ai" : "BigModel";
+  return choice === "zai" ? "Unew.cc" : "BigModel";
 }
 
 function resolveLoginApiKeyProviderFamilyDomain(

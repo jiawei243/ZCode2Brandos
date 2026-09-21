@@ -1,18 +1,18 @@
-import type { IZCodeAgentService } from "@zcode/services";
+import type { IWBrandAgentService } from "@wbrand/services";
 import {
   attributeHostProcessTree,
   createProcessResourceSampler,
   createProcessResourceTableReader,
   type ProcessResourceSampler,
-} from "@zcode/services/node";
+} from "@wbrand/services/node";
 import {
   HostResponseTypes,
   type HostResourceUsageSnapshotRequestMessage,
   type HostResourceUsageSnapshotResultResponse,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 
 interface CreateHostResourceUsageResponderOptions {
-  getAgentService: () => Pick<IZCodeAgentService, "collectLocalRuntimeChildProcesses"> | undefined;
+  getAgentService: () => Pick<IWBrandAgentService, "collectLocalRuntimeChildProcesses"> | undefined;
   postMessage: (message: HostResourceUsageSnapshotResultResponse) => void;
   hostPid?: number;
   sampler?: ProcessResourceSampler;

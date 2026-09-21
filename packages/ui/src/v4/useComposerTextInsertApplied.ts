@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useZCodeSessionStore } from "@/store/zcodeSessionStore.js";
+import { useWBrandSessionStore } from "@/store/wbrandSessionStore.js";
 
 export function useComposerTextInsertApplied(workspacePath: string, workspaceIdentity?: string) {
   return useCallback(
@@ -15,18 +15,18 @@ export function useComposerTextInsertApplied(workspacePath: string, workspaceIde
           resolve(applied);
         };
         const handleAbort = () => {
-          const request = useZCodeSessionStore
+          const request = useWBrandSessionStore
             .getState()
             .getWorkspaceState(workspacePath, workspaceIdentity).composerTextInsertRequest;
           finish(false);
           if (request?.requestId === requestId) {
-            useZCodeSessionStore
+            useWBrandSessionStore
               .getState()
               .clearComposerTextInsertRequest(workspacePath, requestId, workspaceIdentity);
           }
         };
         const inspect = () => {
-          const state = useZCodeSessionStore
+          const state = useWBrandSessionStore
             .getState()
             .getWorkspaceState(workspacePath, workspaceIdentity);
           if (state.composerTextInsertVersion > requestId) {
@@ -42,7 +42,7 @@ export function useComposerTextInsertApplied(workspacePath: string, workspaceIde
           resolve(false);
           return;
         }
-        unsubscribe = useZCodeSessionStore.subscribe(inspect);
+        unsubscribe = useWBrandSessionStore.subscribe(inspect);
         signal.addEventListener("abort", handleAbort, { once: true });
         inspect();
       }),

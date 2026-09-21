@@ -9,11 +9,11 @@ import {
   type MouseEvent,
 } from "react";
 import { ArrowUpRightIcon, MoonIcon, SunIcon } from "lucide-react";
-import { BIGMODEL_PROVIDER_ID, ZAI_PROVIDER_ID } from "@zcode/shared";
-import type { ConversationSharePreview } from "@zcode/shared";
-import { ConversationShareReadonlyTimeline } from "@zcode/ui/conversation-share-readonly";
-import { renderOAuthProviderIcon } from "@zcode/ui/oauth-provider-icon";
-import { applyTheme, resolveTheme, type Theme } from "@zcode/ui/useTheme";
+import { BIGMODEL_PROVIDER_ID, ZAI_PROVIDER_ID } from "@wbrand/shared";
+import type { ConversationSharePreview } from "@wbrand/shared";
+import { ConversationShareReadonlyTimeline } from "@wbrand/ui/conversation-share-readonly";
+import { renderOAuthProviderIcon } from "@wbrand/ui/oauth-provider-icon";
+import { applyTheme, resolveTheme, type Theme } from "@wbrand/ui/useTheme";
 import "./conversationShareLandingPage.css";
 import type { WebOAuthProviderId } from "../auth/browserOAuthCredentialRepo.js";
 import {
@@ -23,7 +23,7 @@ import {
 } from "./conversationSharePreviewClient.js";
 import { resolveShareHeaderView, type ShareHeaderView } from "./shareHeaderLayout.js";
 
-/** 登录入口的展示顺序，与桌面端登录卡片一致（z.ai 在上）。 */
+/** 登录入口的展示顺序，与桌面端登录卡片一致（unew.cc 在上）。 */
 const SHARE_LOGIN_PROVIDERS: readonly WebOAuthProviderId[] = [
   ZAI_PROVIDER_ID,
   BIGMODEL_PROVIDER_ID,
@@ -76,11 +76,11 @@ interface Copy {
   unavailableTitle: string;
   unavailableDescription: string;
   retry: string;
-  continueInZCode: string;
+  continueInWBrand: string;
   switchToDarkTheme: string;
   switchToLightTheme: string;
   continueHelp: string;
-  downloadZCode: string;
+  downloadWBrand: string;
   retryOpen: string;
   /** 结果物计数；{count} 占位。中文无复数，英文分单复数。 */
   artifactCountOne: string;
@@ -88,18 +88,18 @@ interface Copy {
 }
 
 // 站点首页本身就是下载入口，没有 /download 这个 path（单独的下载链接会 404）。
-const ZCODE_DOWNLOAD_URL = "https://zcode.z.ai";
+const WBRAND_DOWNLOAD_URL = "https://wbrand.unew.cc";
 
 const COPY: Record<ConversationShareLandingLocale, Copy> = {
   "zh-CN": {
-    brand: "ZCode 会话分享",
+    brand: "WBrand 会话分享",
     loading: "正在加载分享内容",
     loadingDescription: "请稍候，我们正在验证分享链接。",
     loginTitle: "登录后查看分享",
     loginDescription: "请登录后确认你是否有权限查看这个分享。",
     login: "登录",
     loginWith: {
-      zai: "连接 Z.ai 继续使用",
+      zai: "连接 Unew.cc 继续使用",
       bigmodel: "连接 BigModel 继续使用",
     },
     loginRegion: { zai: "全球", bigmodel: "中国" },
@@ -108,35 +108,35 @@ const COPY: Record<ConversationShareLandingLocale, Copy> = {
     notFoundTitle: "找不到分享内容",
     notFoundDescription: "链接可能无效、分享已被移除，或当前登录账号无法访问。",
     notFoundAccountHint:
-      "Z.ai 与 BigModel 的账号数据不互通。请检查是否选错了登录平台或使用了其他账号。",
+      "Unew.cc 与 BigModel 的账号数据不互通。请检查是否选错了登录平台或使用了其他账号。",
     backToHome: "回到首页",
     networkTitle: "暂时无法加载分享",
     networkDescription: "请检查网络后重试。",
     invalidTitle: "分享格式无效",
     invalidDescription: "服务返回的分享内容无法通过安全校验。",
-    outdatedTitle: "需要更新 ZCode",
-    outdatedDescription: "这个分享由更新版本的 ZCode 创建，请升级后再查看。",
+    outdatedTitle: "需要更新 WBrand",
+    outdatedDescription: "这个分享由更新版本的 WBrand 创建，请升级后再查看。",
     unavailableTitle: "分享不可访问",
     unavailableDescription: "当前账号没有权限，或者分享内容已不存在。",
     retry: "重试",
-    continueInZCode: "去 ZCode 继续",
+    continueInWBrand: "去 WBrand 继续",
     switchToDarkTheme: "切换到深色主题",
     switchToLightTheme: "切换到浅色主题",
-    continueHelp: "如果没有自动打开 ZCode，请先下载客户端，或再次尝试打开。",
-    downloadZCode: "下载 ZCode",
+    continueHelp: "如果没有自动打开 WBrand，请先下载客户端，或再次尝试打开。",
+    downloadWBrand: "下载 WBrand",
     artifactCountOne: "{count} 个结果物",
     artifactCountOther: "{count} 个结果物",
     retryOpen: "再次打开",
   },
   "en-US": {
-    brand: "ZCode Conversation Share",
+    brand: "WBrand Conversation Share",
     loading: "Loading shared conversation",
     loadingDescription: "Please wait while we verify this share link.",
     loginTitle: "Sign in to view this share",
     loginDescription: "Sign in to check whether you can view this shared conversation.",
     login: "Sign in",
     loginWith: {
-      zai: "Connect to Z.ai",
+      zai: "Connect to Unew.cc",
       bigmodel: "Connect to BigModel",
     },
     loginRegion: { zai: "Global", bigmodel: "CN" },
@@ -146,24 +146,24 @@ const COPY: Record<ConversationShareLandingLocale, Copy> = {
     notFoundDescription:
       "The link may be invalid, the share may have been removed, or your current account may not have access.",
     notFoundAccountHint:
-      "Z.ai and BigModel do not share account data. Check whether you selected the wrong sign-in platform or used a different account.",
+      "Unew.cc and BigModel do not share account data. Check whether you selected the wrong sign-in platform or used a different account.",
     backToHome: "Back to home",
     networkTitle: "Unable to load share",
     networkDescription: "Check your network connection and try again.",
     invalidTitle: "Invalid share content",
     invalidDescription: "The shared content failed the public safety contract.",
-    outdatedTitle: "Update ZCode to continue",
+    outdatedTitle: "Update WBrand to continue",
     outdatedDescription:
-      "This share was created by a newer version of ZCode. Please update to view it.",
+      "This share was created by a newer version of WBrand. Please update to view it.",
     unavailableTitle: "Share unavailable",
     unavailableDescription:
       "This account is not allowed to view the share, or it no longer exists.",
     retry: "Try again",
-    continueInZCode: "Continue in ZCode",
+    continueInWBrand: "Continue in WBrand",
     switchToDarkTheme: "Switch to dark theme",
     switchToLightTheme: "Switch to light theme",
-    continueHelp: "If ZCode did not open, download the app or try opening it again.",
-    downloadZCode: "Download ZCode",
+    continueHelp: "If WBrand did not open, download the app or try opening it again.",
+    downloadWBrand: "Download WBrand",
     artifactCountOne: "{count} artifact",
     artifactCountOther: "{count} artifacts",
     retryOpen: "Try again",
@@ -408,9 +408,9 @@ export function ConversationShareLandingPage({
                   ref={brandRef}
                   data-share-brand="true"
                   className="shrink-0 text-ui-lg font-semibold text-foreground"
-                  aria-label="ZCode"
+                  aria-label="WBrand"
                 >
-                  ZCode
+                  WBrand
                 </div>
                 <h1
                   ref={titleRef}
@@ -451,12 +451,12 @@ export function ConversationShareLandingPage({
                             : SHARE_CONTINUE_LINK_CLASS
                         }
                         href={importLink}
-                        aria-label={copy.continueInZCode}
-                        title={copy.continueInZCode}
+                        aria-label={copy.continueInWBrand}
+                        title={copy.continueInWBrand}
                         onClick={handleContinue}
                       >
                         <span className={headerView.continueCompact ? "sr-only" : "truncate"}>
-                          {copy.continueInZCode}
+                          {copy.continueInWBrand}
                         </span>
                         <ArrowUpRightIcon
                           className={
@@ -481,7 +481,7 @@ export function ConversationShareLandingPage({
                     </span>
                     {importLink ? (
                       <span className={SHARE_CONTINUE_MEASURE_CLASS}>
-                        <span>{copy.continueInZCode}</span>
+                        <span>{copy.continueInWBrand}</span>
                         <ArrowUpRightIcon
                           className="size-4 shrink-0 sm:size-5"
                           aria-hidden="true"
@@ -542,8 +542,8 @@ export function ConversationShareLandingPage({
               >
                 {copy.retryOpen}
               </a>
-              <a className="text-brand underline underline-offset-2" href={ZCODE_DOWNLOAD_URL}>
-                {copy.downloadZCode}
+              <a className="text-brand underline underline-offset-2" href={WBRAND_DOWNLOAD_URL}>
+                {copy.downloadWBrand}
               </a>
             </div>
           </ShareContentInset>
@@ -568,7 +568,7 @@ export function ConversationShareLandingPage({
                 href={importLink}
                 onClick={handleContinue}
               >
-                <span className="truncate">{copy.continueInZCode}</span>
+                <span className="truncate">{copy.continueInWBrand}</span>
                 <ArrowUpRightIcon className="size-4 shrink-0 sm:size-5" aria-hidden="true" />
               </a>
             </div>
@@ -675,7 +675,7 @@ export function ConversationShareLandingStatus({
             {isNotFound ? (
               <a
                 className="rounded-md bg-primary px-4 py-2 text-ui-base text-primary-foreground"
-                href={ZCODE_DOWNLOAD_URL}
+                href={WBRAND_DOWNLOAD_URL}
               >
                 {copy.backToHome}
               </a>
@@ -709,7 +709,7 @@ export function ConversationShareLandingLoader({
   const [state, setState] = useState<ConversationShareLandingState>({ kind: "loading" });
   const [activeTheme, setActiveTheme] = useState<Theme>(theme ?? "zai-light");
   const handleThemeChange = useCallback((nextTheme: Theme) => {
-    localStorage.setItem("zcode-theme", nextTheme);
+    localStorage.setItem("wbrand-theme", nextTheme);
     setActiveTheme(nextTheme);
     applyTheme(nextTheme);
   }, []);

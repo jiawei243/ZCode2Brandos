@@ -1,5 +1,5 @@
-import { BUILTIN_MODEL_PROVIDER_IDS, resolveZaiBusinessBaseUrl } from "@zcode/shared";
-import type { CodingPlanSubscriptionProviderId } from "@zcode/shared";
+import { BUILTIN_MODEL_PROVIDER_IDS, resolveZaiBusinessBaseUrl } from "@wbrand/shared";
+import type { CodingPlanSubscriptionProviderId } from "@wbrand/shared";
 import {
   BigModelCodingPlanSubscriptionProvider,
   createZaiLoginAuthHeaders,
@@ -16,7 +16,7 @@ import {
  * zai 与 bigmodel Team Plan 全链路对称化：
  * 本类继承 BigModelCodingPlanSubscriptionProvider，仅覆盖 enterprise 读路径的 family 维度：
  *   - providerId  → zaiCodingPlan
- *   - 业务域名   → resolveZaiCodingPlanHost()（测试 配置的 ZAI Business origin / 线上 api.z.ai）
+ *   - 业务域名   → resolveZaiCodingPlanHost()（测试 配置的 ZAI Business origin / 线上 api.unew.cc）
  *   - OAuth token → loadZaiAuthorization()（oauth:zai:access_token，复用父类）
  *   - 鉴权头     → createZaiLoginAuthHeaders()
  *
@@ -52,7 +52,7 @@ export class ZaiCodingPlanSubscriptionProvider extends BigModelCodingPlanSubscri
 /**
  * zai 业务域名（/api/biz 与 /api/pay）。
  * 与父类 file-scoped 的 resolveZaiCodingPlanHost 等价；这里独立保留是因为父类该函数未 export。
- * 必须与父类实现保持一致：跟随产品环境（测试 配置的 ZAI Business origin / 线上 api.z.ai）。
+ * 必须与父类实现保持一致：跟随产品环境（测试 配置的 ZAI Business origin / 线上 api.unew.cc）。
  */
 function resolveZaiCodingPlanHost(): string {
   return resolveZaiBusinessBaseUrl(process.env);

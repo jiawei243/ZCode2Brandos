@@ -1,9 +1,9 @@
-import type { IDisposable } from "@zcode/rpc";
-import type { IZCodeAgentService } from "@zcode/services";
-import { HostResponseTypes, type ProcessResourceRuntimeSurface } from "@zcode/shared";
+import type { IDisposable } from "@wbrand/rpc";
+import type { IWBrandAgentService } from "@wbrand/services";
+import { HostResponseTypes, type ProcessResourceRuntimeSurface } from "@wbrand/shared";
 
 export function registerHostToolExecResourceTelemetry(options: {
-  agentService: Pick<IZCodeAgentService, "onDynamicToolExecResource">;
+  agentService: Pick<IWBrandAgentService, "onDynamicToolExecResource">;
   postMessage(message: unknown): void;
   runtimeSurface: ProcessResourceRuntimeSurface;
 }): IDisposable {

@@ -3,9 +3,9 @@ import {
   type ApiClient,
   resolveBigModelApiOrigin,
   resolveZaiBusinessBaseUrl,
-  type ZCodeAccountAccess,
+  type WBrandAccountAccess,
   ZAI_PROVIDER_ID,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 import type { ICredentialService } from "#src/credential/credential.js";
 import {
   createBigModelBizHeaders,
@@ -18,13 +18,13 @@ import { readApiJson } from "#src/providers/api/apiJson.js";
 import type { RemoteCustomerInfo } from "./accountProviderApiTypes.js";
 
 const log = createServiceLogger("account-provider-team-plan-request-key");
-const ZCODE_JWT_TOKEN_KEY = "zcodejwttoken";
+const WBRAND_JWT_TOKEN_KEY = "wbrandjwttoken";
 const TEAM_PLAN_RUNTIME_KEY_REQUEST_TIMEOUT_MS = 15_000;
 
 interface TeamPlanRequestKeyDependencies {
   readonly apiClient: ApiClient;
   readonly credentialService?: Pick<ICredentialService, "load">;
-  readonly access: Extract<ZCodeAccountAccess, { planKind: "team-coding-plan" }>;
+  readonly access: Extract<WBrandAccountAccess, { planKind: "team-coding-plan" }>;
 }
 
 export async function resolveAccountTeamPlanRuntimeApiKey(
@@ -41,10 +41,10 @@ export async function resolveAccountTeamPlanRuntimeApiKey(
     });
     return null;
   }
-  const zcodeJwtToken = (await params.credentialService?.load(ZCODE_JWT_TOKEN_KEY))?.trim() ?? "";
-  if (family === "bigmodel" && zcodeJwtToken && token === zcodeJwtToken) {
-    // BigModel /api/biz 只接受登录 access token，不能使用旧版本误存的 ZCode JWT。
-    log.warn(undefined, "Team Plan runtime key projection skipped: stale zcode JWT token", {
+  const wbrandJwtToken = (await params.credentialService?.load(WBRAND_JWT_TOKEN_KEY))?.trim() ?? "";
+  if (family === "bigmodel" && wbrandJwtToken && token === wbrandJwtToken) {
+    // BigModel /api/biz 只接受登录 access token，不能使用旧版本误存的 WBrand JWT。
+    log.warn(undefined, "Team Plan runtime key projection skipped: stale wbrand JWT token", {
       family,
       projectId,
     });
@@ -97,7 +97,7 @@ export async function resolveAccountTeamPlanRuntimeApiKey(
   return resolveTeamPlanProjectApiKey({
     apiClient: params.apiClient,
     authorization: token,
-    family: family === "zai" ? "Z.ai" : "BigModel",
+    family: family === "zai" ? "Unew.cc" : "BigModel",
     host,
     organizationId,
     projectId,
@@ -107,7 +107,7 @@ export async function resolveAccountTeamPlanRuntimeApiKey(
 async function resolveTeamPlanProjectApiKey(params: {
   readonly apiClient: ApiClient;
   readonly authorization: string;
-  readonly family: "BigModel" | "Z.ai";
+  readonly family: "BigModel" | "Unew.cc";
   readonly host: string;
   readonly organizationId: string;
   readonly projectId: string;

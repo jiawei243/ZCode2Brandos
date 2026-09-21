@@ -1,4 +1,4 @@
-import type { ZCodeAutomationRunOutcome, ZCodeAutomationTrigger } from "@zcode/shared";
+import type { WBrandAutomationRunOutcome, WBrandAutomationTrigger } from "@wbrand/shared";
 
 interface CronRunLifecycleRepo {
   ensureRunClaimed(params: {
@@ -6,9 +6,9 @@ interface CronRunLifecycleRepo {
     automationId: string;
     workspaceKey: string;
     scheduledAt: number | null;
-    trigger: ZCodeAutomationTrigger;
+    trigger: WBrandAutomationTrigger;
   }): Promise<void>;
-  markRunOutcome(runId: string, outcome: ZCodeAutomationRunOutcome, error?: string): Promise<void>;
+  markRunOutcome(runId: string, outcome: WBrandAutomationRunOutcome, error?: string): Promise<void>;
   markRunDispatch(params: {
     runId: string;
     dispatchStatus: "failed_to_dispatch";
@@ -23,7 +23,7 @@ interface CronRunLifecycleIdentity {
   automationId: string;
   workspaceKey: string;
   scheduledAt: number | null;
-  trigger: ZCodeAutomationTrigger;
+  trigger: WBrandAutomationTrigger;
 }
 
 type LogWarn = (message: string, error: unknown) => void;
@@ -53,7 +53,7 @@ export function startManualClaimHeartbeat(
 export async function recordCronRunOutcomeBestEffort(
   params: CronRunLifecycleIdentity & {
     repo: CronRunLifecycleRepo;
-    outcome: ZCodeAutomationRunOutcome;
+    outcome: WBrandAutomationRunOutcome;
     error?: string;
     logWarn: LogWarn;
   },
@@ -116,7 +116,7 @@ export async function settleManualDispatchFailureBestEffort(
 export async function settleCronRunTerminalOutcome(
   params: CronRunLifecycleIdentity & {
     repo: CronRunLifecycleRepo;
-    outcome: Exclude<ZCodeAutomationRunOutcome, "running">;
+    outcome: Exclude<WBrandAutomationRunOutcome, "running">;
     error?: string;
     logWarn: LogWarn;
   },

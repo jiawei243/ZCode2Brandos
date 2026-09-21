@@ -20,7 +20,7 @@ import type {
   SettingsSyncSourceScope,
   SettingsSyncSourceRootSummary,
   SettingsSyncTaskImportResult,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 import {
   copyFile,
   cp,
@@ -411,7 +411,7 @@ const SUPPORTED_MCP_AGENT_SOURCES: ExternalAgentMcpPathSource[] = [
   },
 ];
 
-const ZCODE_PLUGIN_MANIFEST_PATH = [".zcode-plugin", "plugin.json"] as const;
+const WBRAND_PLUGIN_MANIFEST_PATH = [".wbrand-plugin", "plugin.json"] as const;
 const CLAUDE_PLUGIN_MANIFEST_PATH = [".claude-plugin", "plugin.json"] as const;
 const CODEX_PLUGIN_MANIFEST_PATH = [".codex-plugin", "plugin.json"] as const;
 const INLINE_PLUGIN_MARKETPLACE = "inline";
@@ -421,44 +421,44 @@ function resolveUserHomeDir(): string {
   return envHome && envHome.length > 0 ? envHome : homedir();
 }
 
-function getWorkspaceZcodeSkillRoot(workspacePath: string): string {
-  return join(workspacePath, ".zcode", "skills");
+function getWorkspaceWbrandSkillRoot(workspacePath: string): string {
+  return join(workspacePath, ".wbrand", "skills");
 }
 
-function getUserZcodeSkillRoot(): string {
-  return join(resolveUserHomeDir(), ".zcode", "skills");
+function getUserWbrandSkillRoot(): string {
+  return join(resolveUserHomeDir(), ".wbrand", "skills");
 }
 
-function getWorkspaceZcodeCommandRoot(workspacePath: string): string {
-  return join(workspacePath, ".zcode", "commands");
+function getWorkspaceWbrandCommandRoot(workspacePath: string): string {
+  return join(workspacePath, ".wbrand", "commands");
 }
 
-function getUserZcodeCommandRoot(): string {
-  return join(resolveUserHomeDir(), ".zcode", "commands");
+function getUserWbrandCommandRoot(): string {
+  return join(resolveUserHomeDir(), ".wbrand", "commands");
 }
 
-function getWorkspaceZcodePluginRoot(workspacePath: string): string {
-  return join(workspacePath, ".zcode", "plugins");
+function getWorkspaceWbrandPluginRoot(workspacePath: string): string {
+  return join(workspacePath, ".wbrand", "plugins");
 }
 
-function getUserZcodePluginRoot(): string {
-  return join(resolveUserHomeDir(), ".zcode", "plugins");
+function getUserWbrandPluginRoot(): string {
+  return join(resolveUserHomeDir(), ".wbrand", "plugins");
 }
 
-function getUserZcodeCliConfigPath(): string {
-  return join(resolveUserHomeDir(), ".zcode", "cli", "config.json");
+function getUserWbrandCliConfigPath(): string {
+  return join(resolveUserHomeDir(), ".wbrand", "cli", "config.json");
 }
 
-function getWorkspaceZcodeConfigPath(workspacePath: string): string {
-  return join(workspacePath, ".zcode", "config.json");
+function getWorkspaceWbrandConfigPath(workspacePath: string): string {
+  return join(workspacePath, ".wbrand", "config.json");
 }
 
 function getClaudeUserAgentsFileSourcePath(): string {
   return join(resolveUserHomeDir(), ".claude", "CLAUDE.md");
 }
 
-function getUserZcodeAgentsFilePath(): string {
-  return join(resolveUserHomeDir(), ".zcode", "AGENTS.md");
+function getUserWbrandAgentsFilePath(): string {
+  return join(resolveUserHomeDir(), ".wbrand", "AGENTS.md");
 }
 
 function resolveTargetRootForScope(
@@ -466,9 +466,9 @@ function resolveTargetRootForScope(
   workspacePath: string | undefined,
 ): string | null {
   if (targetScope === "global") {
-    return getUserZcodeSkillRoot();
+    return getUserWbrandSkillRoot();
   }
-  return workspacePath ? getWorkspaceZcodeSkillRoot(workspacePath) : null;
+  return workspacePath ? getWorkspaceWbrandSkillRoot(workspacePath) : null;
 }
 
 function resolveCandidateTargetRoot(
@@ -477,9 +477,9 @@ function resolveCandidateTargetRoot(
 ): string | null {
   return sourceScope === "workspace"
     ? workspacePath
-      ? getWorkspaceZcodeSkillRoot(workspacePath)
+      ? getWorkspaceWbrandSkillRoot(workspacePath)
       : null
-    : getUserZcodeSkillRoot();
+    : getUserWbrandSkillRoot();
 }
 
 function resolveCommandTargetRootForScope(
@@ -487,9 +487,9 @@ function resolveCommandTargetRootForScope(
   workspacePath: string | undefined,
 ): string | null {
   if (targetScope === "global") {
-    return getUserZcodeCommandRoot();
+    return getUserWbrandCommandRoot();
   }
-  return workspacePath ? getWorkspaceZcodeCommandRoot(workspacePath) : null;
+  return workspacePath ? getWorkspaceWbrandCommandRoot(workspacePath) : null;
 }
 
 function resolveCommandCandidateTargetRoot(
@@ -498,9 +498,9 @@ function resolveCommandCandidateTargetRoot(
 ): string | null {
   return sourceScope === "workspace"
     ? workspacePath
-      ? getWorkspaceZcodeCommandRoot(workspacePath)
+      ? getWorkspaceWbrandCommandRoot(workspacePath)
       : null
-    : getUserZcodeCommandRoot();
+    : getUserWbrandCommandRoot();
 }
 
 function resolvePluginTargetRootForScope(
@@ -508,9 +508,9 @@ function resolvePluginTargetRootForScope(
   workspacePath: string | undefined,
 ): string | null {
   if (targetScope === "global") {
-    return getUserZcodePluginRoot();
+    return getUserWbrandPluginRoot();
   }
-  return workspacePath ? getWorkspaceZcodePluginRoot(workspacePath) : null;
+  return workspacePath ? getWorkspaceWbrandPluginRoot(workspacePath) : null;
 }
 
 function resolvePluginCandidateTargetRoot(
@@ -519,9 +519,9 @@ function resolvePluginCandidateTargetRoot(
 ): string | null {
   return sourceScope === "workspace"
     ? workspacePath
-      ? getWorkspaceZcodePluginRoot(workspacePath)
+      ? getWorkspaceWbrandPluginRoot(workspacePath)
       : null
-    : getUserZcodePluginRoot();
+    : getUserWbrandPluginRoot();
 }
 
 function resolvePluginConfigPathForScope(
@@ -529,9 +529,9 @@ function resolvePluginConfigPathForScope(
   workspacePath: string | undefined,
 ): string | null {
   if (targetScope === "global") {
-    return getUserZcodeCliConfigPath();
+    return getUserWbrandCliConfigPath();
   }
-  return workspacePath ? getWorkspaceZcodeConfigPath(workspacePath) : null;
+  return workspacePath ? getWorkspaceWbrandConfigPath(workspacePath) : null;
 }
 
 function resolveMcpConfigPathForScope(
@@ -539,9 +539,9 @@ function resolveMcpConfigPathForScope(
   workspacePath: string | undefined,
 ): string | null {
   if (targetScope === "global") {
-    return getUserZcodeCliConfigPath();
+    return getUserWbrandCliConfigPath();
   }
-  return workspacePath ? getWorkspaceZcodeConfigPath(workspacePath) : null;
+  return workspacePath ? getWorkspaceWbrandConfigPath(workspacePath) : null;
 }
 
 async function importSkillDirectory(
@@ -778,9 +778,9 @@ async function collectCommandMarkdownPaths(rootPath: string): Promise<string[]> 
 }
 
 async function findPluginManifestPath(pluginPath: string): Promise<string | null> {
-  const zcodeManifestPath = join(pluginPath, ...ZCODE_PLUGIN_MANIFEST_PATH);
-  if (await pathExists(zcodeManifestPath)) {
-    return zcodeManifestPath;
+  const wbrandManifestPath = join(pluginPath, ...WBRAND_PLUGIN_MANIFEST_PATH);
+  if (await pathExists(wbrandManifestPath)) {
+    return wbrandManifestPath;
   }
   const claudeManifestPath = join(pluginPath, ...CLAUDE_PLUGIN_MANIFEST_PATH);
   if (await pathExists(claudeManifestPath)) {
@@ -1021,7 +1021,7 @@ function stripExternalMcpTimeoutFields(config: McpServerConfig): McpServerConfig
   return rest as McpServerConfig;
 }
 
-function readZcodeMcpServers(parsed: Record<string, unknown>): Record<string, McpServerConfig> {
+function readWbrandMcpServers(parsed: Record<string, unknown>): Record<string, McpServerConfig> {
   if (!isRecord(parsed.mcp)) {
     return {};
   }
@@ -1096,7 +1096,7 @@ async function collectExistingMcpServerNameKeys(
   const targetConfigPath = resolveMcpConfigPathForScope(targetScope, workspacePath);
   if (targetConfigPath) {
     for (const name of Object.keys(
-      readZcodeMcpServers(await readJsonFileOrEmpty(targetConfigPath)),
+      readWbrandMcpServers(await readJsonFileOrEmpty(targetConfigPath)),
     )) {
       nameKeys.add(normalizeMcpServerNameKey(name));
     }
@@ -1104,14 +1104,14 @@ async function collectExistingMcpServerNameKeys(
   return nameKeys;
 }
 
-async function addMcpServerToZcodeConfig(
+async function addMcpServerToWbrandConfig(
   filePath: string,
   name: string,
   config: McpServerConfig,
 ): Promise<void> {
   const parsed = await readJsonFileOrEmpty(filePath);
   const currentMcp = isRecord(parsed.mcp) ? parsed.mcp : {};
-  const servers = readZcodeMcpServers(parsed);
+  const servers = readWbrandMcpServers(parsed);
   await writeJsonFile(filePath, {
     ...parsed,
     mcp: {
@@ -2140,7 +2140,7 @@ async function importMcpServersForAgent(
       continue;
     }
     try {
-      await addMcpServerToZcodeConfig(selectedConfigPath, candidate.name, candidate.config);
+      await addMcpServerToWbrandConfig(selectedConfigPath, candidate.name, candidate.config);
       importedCount += 1;
       const existingNameKeys = existingNameKeysByTargetScope.get(selectedTargetScope);
       if (existingNameKeys) {
@@ -2205,7 +2205,7 @@ function shouldScanMcpServers(request: {
 async function getClaudeAgentsFileMigrationStatus(): Promise<SettingsSyncClaudeAgentsFileMigrationStatus> {
   const sourcePath = getClaudeUserAgentsFileSourcePath();
   const sourceExists = await pathExists(sourcePath);
-  const targetPath = getUserZcodeAgentsFilePath();
+  const targetPath = getUserWbrandAgentsFilePath();
   const targetExists = await pathExists(targetPath);
 
   return {
@@ -2218,11 +2218,11 @@ async function getClaudeAgentsFileMigrationStatus(): Promise<SettingsSyncClaudeA
   };
 }
 
-async function copyClaudeAgentsFileToZcodeAgentsFile(params: {
+async function copyClaudeAgentsFileToWbrandAgentsFile(params: {
   overwrite?: boolean;
 }): Promise<SettingsSyncClaudeAgentsFileCopyResult> {
   const sourcePath = getClaudeUserAgentsFileSourcePath();
-  const targetPath = getUserZcodeAgentsFilePath();
+  const targetPath = getUserWbrandAgentsFilePath();
   const sourceExists = await pathExists(sourcePath);
   const targetExists = await pathExists(targetPath);
 
@@ -2275,10 +2275,10 @@ export function createSettingsSyncService(
       return getClaudeAgentsFileMigrationStatus();
     },
 
-    async copyClaudeAgentsFileToZcodeAgentsFile(
+    async copyClaudeAgentsFileToWbrandAgentsFile(
       request = {},
     ): Promise<SettingsSyncClaudeAgentsFileCopyResult> {
-      const result = await copyClaudeAgentsFileToZcodeAgentsFile({
+      const result = await copyClaudeAgentsFileToWbrandAgentsFile({
         overwrite: request.overwrite,
       });
       log.info("[settings-sync] Claude AGENTS.md migration completed", {

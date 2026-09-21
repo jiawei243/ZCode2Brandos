@@ -2,11 +2,11 @@ import type {
   OffPeakCodingPlanSupport,
   OffPeakTaskCreateResult,
   OffPeakTakeNumberAvailability,
-  ZCodeOffPeakTask,
-  ZCodeOffPeakTaskCreateParams,
+  WBrandOffPeakTask,
+  WBrandOffPeakTaskCreateParams,
   ModelSelection,
-} from "@zcode/shared";
-import { ServiceChannels } from "@zcode/shared";
+} from "@wbrand/shared";
+import { ServiceChannels } from "@wbrand/shared";
 import { createServiceDescriptor } from "../descriptors.js";
 
 // 闲时任务管理服务通道（与 automation 服务面互不复用）。
@@ -27,19 +27,19 @@ export interface IOffPeakTaskService {
   /** 服务端取号额度即时快照；仅控制新建入口，POST /ticket 仍是最终准入权威。 */
   getTakeNumberAvailability(): Promise<OffPeakTakeNumberAvailability>;
   /** 创建即取号（成功才落库）；失败返回稳定分类，不跨 RPC 传 raw error。 */
-  createTask(params: ZCodeOffPeakTaskCreateParams): Promise<OffPeakTaskCreateResult>;
-  cancelTask(offPeakTaskId: string): Promise<ZCodeOffPeakTask | null>;
-  pauseTask(offPeakTaskId: string): Promise<ZCodeOffPeakTask | null>;
-  continueTask(offPeakTaskId: string): Promise<ZCodeOffPeakTask | null>;
+  createTask(params: WBrandOffPeakTaskCreateParams): Promise<OffPeakTaskCreateResult>;
+  cancelTask(offPeakTaskId: string): Promise<WBrandOffPeakTask | null>;
+  pauseTask(offPeakTaskId: string): Promise<WBrandOffPeakTask | null>;
+  continueTask(offPeakTaskId: string): Promise<WBrandOffPeakTask | null>;
   deleteTask(offPeakTaskId: string): Promise<void>;
   /** 仅隐藏本地 History 行；不删除 task/session/执行字段。 */
-  deleteHistory(offPeakTaskId: string): Promise<ZCodeOffPeakTask | null>;
+  deleteHistory(offPeakTaskId: string): Promise<WBrandOffPeakTask | null>;
   updateTask(
     offPeakTaskId: string,
     params: OffPeakUpdateTaskParams,
-  ): Promise<ZCodeOffPeakTask | null>;
-  list(): Promise<ZCodeOffPeakTask[]>;
-  get(offPeakTaskId: string): Promise<ZCodeOffPeakTask | null>;
+  ): Promise<WBrandOffPeakTask | null>;
+  list(): Promise<WBrandOffPeakTask[]>;
+  get(offPeakTaskId: string): Promise<WBrandOffPeakTask | null>;
 }
 
 export const IOffPeakTaskService = createServiceDescriptor<IOffPeakTaskService>(

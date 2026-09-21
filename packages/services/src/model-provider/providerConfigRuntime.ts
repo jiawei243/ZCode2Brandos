@@ -4,17 +4,17 @@ import {
   PERSONAL_PROVIDER_CONFIG_FILE_NAME,
   type PersonalProviderConfigRecoveryEvent,
   type NodeProviderConfigRuntimeOptions,
-} from "@zcode/provider-node";
+} from "@wbrand/provider-node";
 import type { ModelProviderConfig } from "./legacyModelProviderSerialized.js";
 import { getAppConfigDir } from "../paths.js";
 import { importLegacyPersonalProviderConfig } from "./legacyPersonalProviderConfigImporter.js";
 
 export interface ProviderConfigRuntimeOptions {
-  readonly zcodeBuiltinFilePath: string;
-  readonly zcodeBuiltinActiveFilePath?: string;
-  readonly zcodeBuiltinRemote?: NodeProviderConfigRuntimeOptions["zcodeBuiltinRemote"];
-  readonly zcodeBuiltinEnvironment?: NodeProviderConfigRuntimeOptions["zcodeBuiltinEnvironment"];
-  readonly onZCodeBuiltinRefreshError?: (error: unknown) => void;
+  readonly wbrandBuiltinFilePath: string;
+  readonly wbrandBuiltinActiveFilePath?: string;
+  readonly wbrandBuiltinRemote?: NodeProviderConfigRuntimeOptions["wbrandBuiltinRemote"];
+  readonly wbrandBuiltinEnvironment?: NodeProviderConfigRuntimeOptions["wbrandBuiltinEnvironment"];
+  readonly onWBrandBuiltinRefreshError?: (error: unknown) => void;
   readonly onPersonalConfigRecovery?: (event: PersonalProviderConfigRecoveryEvent) => void;
   readonly onPersonalConfigPollingError?: (error: unknown) => void;
   readonly personalFilePath?: string;
@@ -25,7 +25,7 @@ export interface ProviderConfigRuntimeOptions {
 
 /**
  * Services 装配层：提供 App 配置目录和已发布旧配置的一次性迁移入口。
- * 配置迁移保留 ZCode 用户的供应商数据，文件运行时由 @zcode/provider-node 唯一实现。
+ * 配置迁移保留 WBrand 用户的供应商数据，文件运行时由 @wbrand/provider-node 唯一实现。
  */
 export class ProviderConfigRuntime {
   readonly configService: NodeProviderConfigRuntime["configService"];
@@ -33,11 +33,11 @@ export class ProviderConfigRuntime {
 
   constructor(options: ProviderConfigRuntimeOptions) {
     const runtimeOptions: NodeProviderConfigRuntimeOptions = {
-      zcodeBuiltinFilePath: options.zcodeBuiltinFilePath,
-      zcodeBuiltinActiveFilePath: options.zcodeBuiltinActiveFilePath,
-      zcodeBuiltinRemote: options.zcodeBuiltinRemote,
-      zcodeBuiltinEnvironment: options.zcodeBuiltinEnvironment,
-      onZCodeBuiltinRefreshError: options.onZCodeBuiltinRefreshError,
+      wbrandBuiltinFilePath: options.wbrandBuiltinFilePath,
+      wbrandBuiltinActiveFilePath: options.wbrandBuiltinActiveFilePath,
+      wbrandBuiltinRemote: options.wbrandBuiltinRemote,
+      wbrandBuiltinEnvironment: options.wbrandBuiltinEnvironment,
+      onWBrandBuiltinRefreshError: options.onWBrandBuiltinRefreshError,
       onPersonalConfigRecovery: options.onPersonalConfigRecovery,
       onPersonalConfigPollingError: options.onPersonalConfigPollingError,
       personalFilePath:
@@ -65,16 +65,16 @@ export class ProviderConfigRuntime {
     return this.#runtime.personalRepository;
   }
 
-  resolveZCodeBuiltinActiveFilePath(): Promise<string> {
-    return this.#runtime.resolveZCodeBuiltinActiveFilePath();
+  resolveWBrandBuiltinActiveFilePath(): Promise<string> {
+    return this.#runtime.resolveWBrandBuiltinActiveFilePath();
   }
 
-  refreshZCodeBuiltin(options?: { readonly force?: boolean }) {
-    return this.#runtime.refreshZCodeBuiltin(options);
+  refreshWBrandBuiltin(options?: { readonly force?: boolean }) {
+    return this.#runtime.refreshWBrandBuiltin(options);
   }
 
-  onDidCheckZCodeBuiltin(listener: () => Promise<void>): () => void {
-    return this.#runtime.onDidCheckZCodeBuiltin(listener);
+  onDidCheckWBrandBuiltin(listener: () => Promise<void>): () => void {
+    return this.#runtime.onDidCheckWBrandBuiltin(listener);
   }
 
   dispose(): void {

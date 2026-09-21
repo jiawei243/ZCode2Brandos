@@ -1,4 +1,4 @@
-import type { CodingPlanResetType } from "@zcode/shared";
+import type { CodingPlanResetType } from "@wbrand/shared";
 import type {
   CodingPlanQuotaResetDialogConfig,
   CodingPlanQuotaResetDialogResetItem,

@@ -10,7 +10,7 @@ import type {
   TaskRunLeaseTarget,
   TaskStreamMirrorPublishOp,
   TaskStreamMirrorTarget,
-} from "@zcode/shared";
+} from "@wbrand/shared";
 
 export interface SessionRealtimePort {
   readonly hostId: string;
